@@ -7,6 +7,8 @@ import axios from 'axios';
 import FilterSidebar from '../Components/Product/FilterSidebar';
 import ProductCard from '../Components/Product/ProductCard';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const SearchPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const query = searchParams.get('q') || '';
@@ -34,7 +36,7 @@ const SearchPage = () => {
 
     const fetchInitialData = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/categories/tree');
+            const res = await axios.get(`${BASE_URL}/api/v1/categories/tree`);
             setCategories(res.data.data.categories);
         } catch (error) {
     console.error(error);
@@ -44,7 +46,7 @@ const SearchPage = () => {
 
     const fetchBrands = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/brands');
+            const res = await axios.get(`${BASE_URL}/api/v1/brands`);
             setBrands(res.data.data.brands || []);
         } catch (error) {
     console.error(error);
@@ -57,7 +59,7 @@ const SearchPage = () => {
         try {
             const params = new URLSearchParams(searchParams);
             params.set('search', query);
-            const res = await axios.get(`http://localhost:5000/api/v1/products?${params.toString()}`);
+            const res = await axios.get(`${BASE_URL}/api/v1/products?${params.toString()}`);
             setProducts(res.data.data.products);
         } catch (error) {
     console.error(error);

@@ -7,6 +7,8 @@ import AuthContext from "../Context/Auth/authContext";
 import { MapPin, ArrowLeft, Loader2, CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function AddressForm() {
     const navigate = useNavigate();
     const { signupData, clearSignupData, login } = useContext(AuthContext);
@@ -36,7 +38,7 @@ export default function AddressForm() {
         setLoading(true);
         try {
             const payload = { ...signupData, address };
-            const res = await axios.post("http://localhost:5000/api/v1/auth/signup", payload);
+            const res = await axios.post(`${BASE_URL}/api/v1/auth/signup`, payload);
             if (res.data.success || res.data.token) {
                 await login(res.data.data.user, res.data.token);
                 navigate('/');

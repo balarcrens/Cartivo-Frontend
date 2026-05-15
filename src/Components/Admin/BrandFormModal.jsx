@@ -14,6 +14,8 @@ import {
 import AuthContext from '../../Context/Auth/authContext';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const BrandFormModal = ({ isOpen, onClose, brand, onSave }) => {
     const { token } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
@@ -46,12 +48,12 @@ const BrandFormModal = ({ isOpen, onClose, brand, onSave }) => {
 
     const fetchCategories = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/categories?status=active');
+            const res = await axios.get(`${BASE_URL}/api/v1/categories?status=active`);
             if (res.data.status === 'success') {
                 setCategories(res.data.data.categories);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error fetching categories:', error);
         }
     };
@@ -66,8 +68,8 @@ const BrandFormModal = ({ isOpen, onClose, brand, onSave }) => {
         setLoading(true);
         try {
             const url = brand
-                ? `http://localhost:5000/api/v1/brands/${brand.id}`
-                : 'http://localhost:5000/api/v1/brands';
+                ? `${BASE_URL}/api/v1/brands/${brand.id}`
+                : `${BASE_URL}/api/v1/brands`;
             const method = brand ? 'patch' : 'post';
 
             const res = await axios[method](url, formData, {
@@ -80,7 +82,7 @@ const BrandFormModal = ({ isOpen, onClose, brand, onSave }) => {
                 toast.success(`Brand ${method === 'patch' ? 'updated' : 'added'} successfullly`);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error saving brand:', error);
             toast.error('Failed to save brand');
         } finally {

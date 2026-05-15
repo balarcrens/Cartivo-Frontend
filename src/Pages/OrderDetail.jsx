@@ -12,6 +12,8 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const ReturnFacility = ({ order, token }) => {
     const [showForm, setShowForm] = useState(false);
     const [reason, setReason] = useState('');
@@ -23,14 +25,14 @@ const ReturnFacility = ({ order, token }) => {
     useEffect(() => {
         const fetchReturnStatus = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/v1/orders/${order.id}/return-status`, {
+                const res = await axios.get(`${BASE_URL}/api/v1/orders/${order.id}/return-status`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 if (res.data.status === 'success') {
                     setReturnRequest(res.data.data.return_request);
                 }
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 console.error("Error fetching return status:", error);
             } finally {
                 setFetchLoading(false);
@@ -62,7 +64,7 @@ const ReturnFacility = ({ order, token }) => {
 
         setLoading(true);
         try {
-            const res = await axios.post(`http://localhost:5000/api/v1/orders/request-return`, {
+            const res = await axios.post(`${BASE_URL}/api/v1/orders/request-return`, {
                 order_id: order.id,
                 reason,
                 images
@@ -76,7 +78,7 @@ const ReturnFacility = ({ order, token }) => {
                 setShowForm(false);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error(error.response?.data?.message || "Failed to submit return request");
         } finally {
             setLoading(false);
@@ -239,7 +241,7 @@ const OrderDetail = () => {
                 .save();
 
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Failed to download PDF. Please try again.');
         } finally {
             setDownloading(false);
@@ -249,14 +251,14 @@ const OrderDetail = () => {
     useEffect(() => {
         const fetchOrderDetail = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/v1/orders/${orderId}`, {
+                const res = await axios.get(`${BASE_URL}/api/v1/orders/${orderId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 if (res.data.status === 'success') {
                     setOrderData(res.data.data);
                 }
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 console.error('Error fetching order detail:', error);
             } finally {
                 setLoading(false);

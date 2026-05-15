@@ -19,6 +19,8 @@ import {
 import AuthContext from '../../Context/Auth/authContext';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const CategoryFormModal = ({ isOpen, onClose, category, onSave }) => {
     const { token } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
@@ -51,7 +53,7 @@ const CategoryFormModal = ({ isOpen, onClose, category, onSave }) => {
 
     const fetchCategories = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/categories?status=all');
+            const res = await axios.get(`${BASE_URL}/api/v1/categories?status=all`);
             // Filter out the current category from being its own parent
             const filteredCats = category
                 ? res.data.data.categories.filter(c => c.id !== category.id)
@@ -73,8 +75,8 @@ const CategoryFormModal = ({ isOpen, onClose, category, onSave }) => {
         setLoading(true);
         try {
             const url = category
-                ? `http://localhost:5000/api/v1/categories/${category.id}`
-                : 'http://localhost:5000/api/v1/categories';
+                ? `${BASE_URL}/api/v1/categories/${category.id}`
+                : `${BASE_URL}/api/v1/categories`;
             const method = category ? 'patch' : 'post';
 
             const submissionData = {

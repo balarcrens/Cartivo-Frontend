@@ -19,6 +19,8 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const AdminOrders = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -29,7 +31,7 @@ const AdminOrders = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/v1/orders/all', {
+                const res = await axios.get(`${BASE_URL}/api/v1/orders/all`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 if (res.data.status === 'success') {

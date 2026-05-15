@@ -19,6 +19,8 @@ import HeroFormModal from '../../Components/Admin/HeroFormModal';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const AdminHero = () => {
     const [banners, setBanners] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -29,7 +31,7 @@ const AdminHero = () => {
     const fetchBanners = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/hero', {
+            const res = await axios.get(`${BASE_URL}/api/v1/hero`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -60,7 +62,7 @@ const AdminHero = () => {
 
         if (result.isConfirmed) {
             try {
-                await axios.delete(`http://localhost:5000/api/v1/hero/${id}`, {
+                await axios.delete(`${BASE_URL}/api/v1/hero/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 fetchBanners();

@@ -23,6 +23,8 @@ import CouponFormModal from '../../Components/Admin/CouponFormModal';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const AdminCoupons = () => {
     const [coupons, setCoupons] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -34,7 +36,7 @@ const AdminCoupons = () => {
     const fetchCoupons = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/coupons', {
+            const res = await axios.get(`${BASE_URL}/api/v1/coupons`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -65,7 +67,7 @@ const AdminCoupons = () => {
 
         if (result.isConfirmed) {
             try {
-                await axios.delete(`http://localhost:5000/api/v1/coupons/${id}`, {
+                await axios.delete(`${BASE_URL}/api/v1/coupons/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 fetchCoupons();

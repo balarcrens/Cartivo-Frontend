@@ -19,6 +19,8 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const AdminReturns = () => {
     const [returns, setReturns] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -39,7 +41,7 @@ const AdminReturns = () => {
 
     const fetchReturns = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/orders/returns/all', {
+            const res = await axios.get(`${BASE_URL}/api/v1/orders/returns/all`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -66,7 +68,7 @@ const AdminReturns = () => {
         e.preventDefault();
         setUpdating(true);
         try {
-            const res = await axios.patch(`http://localhost:5000/api/v1/orders/returns/${selectedReturn.id}`, {
+            const res = await axios.patch(`${BASE_URL}/api/v1/orders/returns/${selectedReturn.id}`, {
                 status,
                 admin_comment: adminComment,
                 order_status: orderStatus,

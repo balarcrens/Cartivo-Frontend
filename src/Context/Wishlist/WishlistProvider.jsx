@@ -5,6 +5,8 @@ import WishlistContext from './WishlistContext';
 import AuthContext from '../Auth/authContext';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function WishlistProvider({ children }) {
     const [wishlistItems, setWishlistItems] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -18,7 +20,7 @@ export default function WishlistProvider({ children }) {
 
         try {
             setLoading(true);
-            const res = await axios.get('http://localhost:5000/api/v1/cart/wishlist', {
+            const res = await axios.get(`${BASE_URL}/api/v1/cart/wishlist`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -43,7 +45,7 @@ export default function WishlistProvider({ children }) {
         }
 
         try {
-            const res = await axios.post('http://localhost:5000/api/v1/cart/wishlist', {
+            const res = await axios.post(`${BASE_URL}/api/v1/cart/wishlist`, {
                 product_id: productId
             }, {
                 headers: { Authorization: `Bearer ${token}` }
@@ -62,7 +64,7 @@ export default function WishlistProvider({ children }) {
         if (!isAuthenticated) return;
 
         try {
-            const res = await axios.delete(`http://localhost:5000/api/v1/cart/wishlist/${productId}`, {
+            const res = await axios.delete(`${BASE_URL}/api/v1/cart/wishlist/${productId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 

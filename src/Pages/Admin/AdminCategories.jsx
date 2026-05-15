@@ -22,6 +22,8 @@ import CategoryFormModal from '../../Components/Admin/CategoryFormModal';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const AdminCategories = () => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -33,7 +35,7 @@ const AdminCategories = () => {
     const fetchCategories = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/categories?status=all', {
+            const res = await axios.get(`${BASE_URL}/api/v1/categories?status=all`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -64,7 +66,7 @@ const AdminCategories = () => {
 
         if (result.isConfirmed) {
             try {
-                await axios.delete(`http://localhost:5000/api/v1/categories/${id}`, {
+                await axios.delete(`${BASE_URL}/api/v1/categories/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 fetchCategories();

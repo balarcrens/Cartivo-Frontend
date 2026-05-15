@@ -19,6 +19,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
 import { useNavigate } from 'react-router-dom';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function Home() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
@@ -34,7 +36,7 @@ export default function Home() {
 
     const fetchHomeData = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/home');
+            const res = await axios.get(`${BASE_URL}/api/v1/home`);
             if (res.data.status === 'success') {
                 setHomeData(res.data.data);
             }

@@ -6,6 +6,8 @@ import { X, Upload, Save, Type, Link, Layers, ToggleLeft, ToggleRight, Trash2 } 
 import AuthContext from '../../Context/Auth/authContext';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const HeroFormModal = ({ isOpen, onClose, banner, onSave }) => {
     const { token } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
@@ -77,7 +79,7 @@ const HeroFormModal = ({ isOpen, onClose, banner, onSave }) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const url = `http://localhost:5000/api/v1/hero${banner ? `/${banner.id}` : ''}`;
+            const url = `${BASE_URL}/api/v1/hero${banner ? `/${banner.id}` : ''}`;
             const method = banner ? 'patch' : 'post';
 
             const res = await axios({

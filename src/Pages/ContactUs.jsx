@@ -3,6 +3,8 @@ import { Mail, Phone, MapPin, Send, MessageCircle, Clock, ShieldCheck, Loader2 }
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function ContactUs() {
     const [formData, setFormData] = useState({
         name: '',
@@ -16,7 +18,7 @@ export default function ContactUs() {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await axios.post('http://localhost:5000/api/v1/contacts', formData);
+            const res = await axios.post(`${BASE_URL}/api/v1/contacts`, formData);
             if (res.data.status === 'success') {
                 toast.success('Thank you for contacting us! We will get back to you soon.');
                 setFormData({

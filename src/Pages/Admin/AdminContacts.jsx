@@ -23,6 +23,8 @@ import {
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const AdminContacts = () => {
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -33,7 +35,7 @@ const AdminContacts = () => {
     const fetchMessages = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/contacts', {
+            const res = await axios.get(`${BASE_URL}/api/v1/contacts`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -65,7 +67,7 @@ const AdminContacts = () => {
 
         if (result.isConfirmed) {
             try {
-                await axios.delete(`http://localhost:5000/api/v1/contacts/${id}`, {
+                await axios.delete(`${BASE_URL}/api/v1/contacts/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 fetchMessages();
@@ -80,7 +82,7 @@ const AdminContacts = () => {
 
     const updateStatus = async (id, status) => {
         try {
-            await axios.patch(`http://localhost:5000/api/v1/contacts/${id}`, { status }, {
+            await axios.patch(`${BASE_URL}/api/v1/contacts/${id}`, { status }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             toast.success(`Message marked as ${status}`);

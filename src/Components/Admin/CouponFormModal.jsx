@@ -17,6 +17,8 @@ import {
 import AuthContext from '../../Context/Auth/authContext';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const CouponFormModal = ({ isOpen, onClose, coupon, onSave }) => {
     const { token } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
@@ -65,8 +67,8 @@ const CouponFormModal = ({ isOpen, onClose, coupon, onSave }) => {
         setLoading(true);
         try {
             const url = coupon
-                ? `http://localhost:5000/api/v1/coupons/${coupon.id}`
-                : 'http://localhost:5000/api/v1/coupons';
+                ? `${BASE_URL}/api/v1/coupons/${coupon.id}`
+                : `${BASE_URL}/api/v1/coupons`;
             const method = coupon ? 'patch' : 'post';
 
             const submissionData = {

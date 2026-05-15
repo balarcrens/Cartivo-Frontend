@@ -13,6 +13,8 @@ import AuthContext from '../Context/Auth/authContext';
 import WishlistContext from '../Context/Wishlist/WishlistContext';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const ProductDetail = () => {
     const location = useLocation();
     const { slug } = useParams();
@@ -92,10 +94,9 @@ const ProductDetail = () => {
 
     const fetchActiveCoupons = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/coupons/active');
+            const res = await axios.get(`${BASE_URL}/api/v1/coupons/active`);
             setActiveCoupons(res.data.data.coupons);
         } catch (error) {
-    console.error(error);
             console.error("Error fetching coupons", error);
         }
     };
@@ -108,10 +109,9 @@ const ProductDetail = () => {
 
     const fetchReviews = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/v1/reviews/product/${product.id}`);
+            const res = await axios.get(`${BASE_URL}/api/v1/reviews/product/${product.id}`);
             setReviews(res.data.data.reviews);
         } catch (error) {
-    console.error(error);
             console.error("Error fetching reviews", error);
         }
     };
@@ -147,7 +147,7 @@ const ProductDetail = () => {
 
         setIsSubmitting(true);
         try {
-            await axios.post('http://localhost:5000/api/v1/reviews', {
+            await axios.post(`${BASE_URL}/api/v1/reviews`, {
                 product_id: product.id,
                 rating,
                 comment,
@@ -166,7 +166,6 @@ const ProductDetail = () => {
 
             fetchReviews();
         } catch (error) {
-    console.error(error);
             toast.error("Failed to submit review");
             console.error(error);
         } finally {
@@ -182,7 +181,7 @@ const ProductDetail = () => {
     const fetchProductData = async () => {
         setLoading(true);
         try {
-            const res = await axios.get(`http://localhost:5000/api/v1/products/slug/${slug}`);
+            const res = await axios.get(`${BASE_URL}/api/v1/products/slug/${slug}`);
             const productData = res.data.data.product;
             const variantData = res.data.data.variants || [];
 
@@ -204,10 +203,9 @@ const ProductDetail = () => {
                 setActiveVariant(variantData[0]);
             }
 
-            const relatedRes = await axios.get(`http://localhost:5000/api/v1/products?category=${productData.category_slug || ''}&limit=4`);
+            const relatedRes = await axios.get(`${BASE_URL}/api/v1/products?category=${productData.category_slug || ''}&limit=4`);
             setRelatedProducts(relatedRes.data.data.products.filter(p => p.slug !== slug));
         } catch (error) {
-    console.error(error);
             console.error("Error fetching product details", error);
         } finally {
             setLoading(false);

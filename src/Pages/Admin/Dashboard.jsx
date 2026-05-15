@@ -14,6 +14,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Dashboard = () => {
     const navigate = useNavigate();
     const [stats, setStats] = useState(null);
@@ -28,8 +30,8 @@ const Dashboard = () => {
                     headers: { Authorization: `Bearer ${token}` }
                 };
                 const [statsRes, ordersRes] = await Promise.all([
-                    axios.get('http://localhost:5000/api/v1/admin/stats', config),
-                    axios.get('http://localhost:5000/api/v1/admin/recent-orders', config)
+                    axios.get(`${BASE_URL}/api/v1/admin/stats`, config),
+                    axios.get(`${BASE_URL}/api/v1/admin/recent-orders`, config)
                 ]);
 
                 setStats(statsRes.data.data);

@@ -97,7 +97,7 @@ const AdminProductDetail = () => {
 
     const fetchProductDetail = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/v1/products/${productId}`, {
+            const res = await axios.get(`${BASE_URL}/api/v1/products/${productId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -129,7 +129,7 @@ const AdminProductDetail = () => {
 
         if (result.isConfirmed) {
             try {
-                await axios.delete(`http://localhost:5000/api/v1/products/${productId}`, {
+                await axios.delete(`${BASE_URL}/api/v1/products/${productId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 navigate('/admin/products');

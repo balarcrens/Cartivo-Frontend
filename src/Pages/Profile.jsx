@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Profile = () => {
     const { user, updateUser, logout } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -45,7 +47,7 @@ const Profile = () => {
         setIsAddrLoading(true);
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5000/api/v1/addresses', {
+            const response = await fetch(`${BASE_URL}/api/v1/addresses'`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await response.json();
@@ -71,7 +73,7 @@ const Profile = () => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5000/api/v1/users/updateMe', {
+            const response = await fetch(`${BASE_URL}/api/v1/users/updateMe`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -127,8 +129,8 @@ const Profile = () => {
         try {
             const token = localStorage.getItem('token');
             const url = editingAddress
-                ? `http://localhost:5000/api/v1/addresses/${editingAddress.id}`
-                : 'http://localhost:5000/api/v1/addresses';
+                ? `${BASE_URL}/api/v1/addresses/${editingAddress.id}`
+                : `${BASE_URL}/api/v1/addresses`;
             const method = editingAddress ? 'PATCH' : 'POST';
 
             const response = await fetch(url, {
@@ -173,7 +175,7 @@ const Profile = () => {
         if (result.isConfirmed) return;
         try {
             const token = localStorage.getItem('token');
-            await fetch(`http://localhost:5000/api/v1/addresses/${id}`, {
+            await fetch(`${BASE_URL}/api/v1/addresses/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -188,7 +190,7 @@ const Profile = () => {
     const handleSetDefault = async (id) => {
         try {
             const token = localStorage.getItem('token');
-            await fetch(`http://localhost:5000/api/v1/addresses/${id}/set-default`, {
+            await fetch(`${BASE_URL}/api/v1/addresses/${id}/set-default`, {
                 method: 'PATCH',
                 headers: { 'Authorization': `Bearer ${token}` }
             });

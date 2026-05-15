@@ -25,6 +25,8 @@ import {
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const AdminUsers = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -34,7 +36,7 @@ const AdminUsers = () => {
     const fetchUsers = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/users', {
+            const res = await axios.get(`${BASE_URL}/api/v1/users`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -54,7 +56,7 @@ const AdminUsers = () => {
 
     const handleUpdateUser = async (id, data) => {
         try {
-            const res = await axios.patch(`http://localhost:5000/api/v1/users/${id}`, data, {
+            const res = await axios.patch(`${BASE_URL}/api/v1/users/${id}`, data, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -80,7 +82,7 @@ const AdminUsers = () => {
 
         if (result.isConfirmed) {
             try {
-                await axios.delete(`http://localhost:5000/api/v1/users/${id}`, {
+                await axios.delete(`${BASE_URL}/api/v1/users/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setUsers(users.filter(user => user.id !== id));

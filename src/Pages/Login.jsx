@@ -7,6 +7,8 @@ import AuthContext from "../Context/Auth/authContext";
 import { Mail, Lock, Loader2, ArrowRight, Eye, EyeClosed } from "lucide-react";
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function Login() {
     const navigate = useNavigate();
     const { login, clearSignupData } = useContext(AuthContext);
@@ -26,7 +28,7 @@ export default function Login() {
         setLoading(true);
 
         try {
-            const res = await axios.post("http://localhost:5000/api/v1/auth/login", formData);
+            const res = await axios.post(`${BASE_URL}/api/v1/auth/login`, formData);
 
             if (res.data.token) {
                 login(res.data.data.user, res.data.token);

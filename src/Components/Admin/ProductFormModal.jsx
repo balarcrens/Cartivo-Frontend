@@ -21,6 +21,8 @@ import {
 import AuthContext from '../../Context/Auth/authContext';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const ProductFormModal = ({ isOpen, onClose, product, onSave }) => {
     const { token } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
@@ -152,7 +154,7 @@ const ProductFormModal = ({ isOpen, onClose, product, onSave }) => {
 
     const fetchVariants = async (productId) => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/v1/variants/product/${productId}`);
+            const res = await axios.get(`${BASE_URL}/api/v1/variants/product/${productId}`);
             if (res.data.status === 'success') {
                 setFormData(prev => ({ ...prev, variants: res.data.data.variants }));
             }
@@ -184,7 +186,7 @@ const ProductFormModal = ({ isOpen, onClose, product, onSave }) => {
 
     const fetchCategories = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/categories');
+            const res = await axios.get(`${BASE_URL}/api/v1/categories`);
             setCategories(res.data.data.categories);
         } catch (error) {
     console.error(error);
@@ -194,7 +196,7 @@ const ProductFormModal = ({ isOpen, onClose, product, onSave }) => {
 
     const fetchBrands = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/brands');
+            const res = await axios.get(`${BASE_URL}/api/v1/brands`);
             setBrands(res.data.data.brands);
         } catch (error) {
     console.error(error);
@@ -204,7 +206,7 @@ const ProductFormModal = ({ isOpen, onClose, product, onSave }) => {
 
     const fetchVendors = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/vendors/all', {
+            const res = await axios.get(`${BASE_URL}/api/v1/vendors/all`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setVendors(res.data.data.vendors);
@@ -309,8 +311,8 @@ const ProductFormModal = ({ isOpen, onClose, product, onSave }) => {
             };
 
             const url = product
-                ? `http://localhost:5000/api/v1/products/${product.id}`
-                : 'http://localhost:5000/api/v1/products';
+                ? `${BASE_URL}/api/v1/products/${product.id}`
+                : `${BASE_URL}/api/v1/products`;
             const method = product ? 'patch' : 'post';
 
             const res = await axios[method](url, submissionData, {

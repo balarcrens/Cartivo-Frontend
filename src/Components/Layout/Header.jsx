@@ -16,6 +16,8 @@ import WishlistContext from '../../Context/Wishlist/WishlistContext';
 import { useContext, useEffect } from 'react';
 import axios from 'axios';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function Header() {
     const navigate = useNavigate();
     const [isTopBarShow, setIsTopBarShow] = useState(true);
@@ -41,7 +43,7 @@ export default function Header() {
 
     const fetchCategories = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/categories/tree');
+            const res = await axios.get(`${BASE_URL}/api/v1/categories/tree`);
             if (res.data.status === 'success') {
                 setCategories(res.data.data.categories);
             }

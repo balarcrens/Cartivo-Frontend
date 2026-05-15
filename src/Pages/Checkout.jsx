@@ -30,6 +30,8 @@ import CartContext from '../Context/Cart/CartContext';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function Checkout() {
     const navigate = useNavigate();
     const { token, user } = useContext(AuthContext);
@@ -87,19 +89,19 @@ export default function Checkout() {
 
     const fetchActiveCoupons = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/coupons/active', {
+            const res = await axios.get(`${BASE_URL}/api/v1/coupons/active`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setActiveCoupons(res.data.data.coupons);
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error("Error fetching coupons", error);
         }
     };
 
     const fetchAddresses = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/addresses', {
+            const res = await axios.get(`${BASE_URL}/api/v1/addresses`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -109,7 +111,7 @@ export default function Checkout() {
                 else if (res.data.data.addresses.length > 0) setSelectedAddress(res.data.data.addresses[0]);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             if (error.response?.status !== 404) {
                 console.error('Error fetching addresses:', error);
             } else {
@@ -125,7 +127,7 @@ export default function Checkout() {
         try {
             setLoading(true);
             if (isEditingAddress) {
-                const res = await axios.patch(`http://localhost:5000/api/v1/addresses/${isEditingAddress.id}`, addressForm, {
+                const res = await axios.patch(`${BASE_URL}/api/v1/addresses/${isEditingAddress.id}`, addressForm, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 if (res.data.status === 'success') {
@@ -135,7 +137,7 @@ export default function Checkout() {
                     toast.success('Address updated successfully');
                 }
             } else {
-                const res = await axios.post('http://localhost:5000/api/v1/addresses', addressForm, {
+                const res = await axios.post(`${BASE_URL}/api/v1/addresses`, addressForm, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 if (res.data.status === 'success') {
@@ -145,7 +147,7 @@ export default function Checkout() {
                 }
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Failed to save address');
         } finally {
             setLoading(false);
@@ -165,13 +167,13 @@ export default function Checkout() {
 
         if (result.isConfirmed) {
             try {
-                await axios.delete(`http://localhost:5000/api/v1/addresses/${addressId}`, {
+                await axios.delete(`${BASE_URL}/api/v1/addresses/${addressId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
 
                 fetchAddresses();
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 toast.error('Failed to delete address');
             }
         }
@@ -183,7 +185,7 @@ export default function Checkout() {
         setCouponLoading(true);
         setCouponError('');
         try {
-            const res = await axios.get(`http://localhost:5000/api/v1/coupons/check/${targetCode}`, {
+            const res = await axios.get(`${BASE_URL}/api/v1/coupons/check/${targetCode}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -197,7 +199,7 @@ export default function Checkout() {
                 }
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             setCouponError(error.response?.data?.message || 'Invalid coupon code');
         } finally {
             setCouponLoading(false);
@@ -253,7 +255,7 @@ export default function Checkout() {
                 payment_method: paymentMethod
             };
 
-            const res = await axios.post('http://localhost:5000/api/v1/orders', payload, {
+            const res = await axios.post(`${BASE_URL}/api/v1/orders`, payload, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -282,7 +284,7 @@ export default function Checkout() {
                         handler: async function (response) {
                             try {
                                 const verifyRes = await axios.post(
-                                    'http://localhost:5000/api/v1/orders/verify-payment',
+                                    `${BASE_URL}/api/v1/orders/verify-payment`,
                                     {
                                         razorpay_order_id: response.razorpay_order_id,
                                         razorpay_payment_id: response.razorpay_payment_id,
@@ -303,7 +305,7 @@ export default function Checkout() {
                                 }
 
                             } catch (error) {
-    console.error(error);
+                                console.error(error);
                                 console.error("Verification error:", error);
                                 toast.error(error.response?.data?.message || "Payment verification failed");
                             } finally {
@@ -344,7 +346,7 @@ export default function Checkout() {
                 }
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error("Order error:", error);
             toast.error(error.response?.data?.message || 'Failed to place order');
             setOrderLoading(false);

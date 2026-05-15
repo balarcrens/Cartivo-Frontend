@@ -7,6 +7,8 @@ import axios from 'axios';
 import AuthContext from '../Context/Auth/authContext';
 import confetti from "canvas-confetti";
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function OrderSuccess() {
     const { orderId } = useParams();
     const { token } = useContext(AuthContext);
@@ -77,7 +79,7 @@ export default function OrderSuccess() {
     useEffect(() => {
         const fetchOrder = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/v1/orders/${orderId}`, {
+                const res = await axios.get(`${BASE_URL}/api/v1/orders/${orderId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 if (res.data.status === 'success') {

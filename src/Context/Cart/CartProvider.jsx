@@ -5,6 +5,8 @@ import CartContext from './CartContext';
 import AuthContext from '../Auth/authContext';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function CartProvider({ children }) {
     const [cartItems, setCartItems] = useState([]);
     const [cartCount, setCartCount] = useState(0);
@@ -23,7 +25,7 @@ export default function CartProvider({ children }) {
 
         try {
             setLoading(true);
-            const res = await axios.get('http://localhost:5000/api/v1/cart', {
+            const res = await axios.get(`${BASE_URL}/api/v1/cart`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -50,7 +52,7 @@ export default function CartProvider({ children }) {
         }
 
         try {
-            const res = await axios.post('http://localhost:5000/api/v1/cart', {
+            const res = await axios.post(`${BASE_URL}/api/v1/cart`, {
                 product_id: productId,
                 variant_id: variantId,
                 quantity
@@ -71,7 +73,7 @@ export default function CartProvider({ children }) {
 
     const removeFromCart = async (itemId) => {
         try {
-            const res = await axios.delete(`http://localhost:5000/api/v1/cart/${itemId}`, {
+            const res = await axios.delete(`${BASE_URL}/api/v1/cart/${itemId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.status === 204 || res.data.status === 'success') {
@@ -86,7 +88,7 @@ export default function CartProvider({ children }) {
 
     const clearCart = async () => {
         try {
-            const res = await axios.delete('http://localhost:5000/api/v1/cart', {
+            const res = await axios.delete(`${BASE_URL}/api/v1/cart`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.status === 204 || res.data.status === 'success') {
@@ -104,7 +106,7 @@ export default function CartProvider({ children }) {
     const updateQuantity = async (itemId, quantity) => {
         if (quantity < 1) return;
         try {
-            const res = await axios.patch('http://localhost:5000/api/v1/cart/update-quantity', {
+            const res = await axios.patch(`${BASE_URL}/api/v1/cart/update-quantity`, {
                 id: itemId,
                 quantity
             }, {

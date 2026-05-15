@@ -22,7 +22,7 @@ const AdminOrderDetail = () => {
 
     const fetchOrderDetail = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/v1/orders/${orderId}`, {
+            const res = await axios.get(`${BASE_URL}/api/v1/orders/${orderId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -47,7 +47,7 @@ const AdminOrderDetail = () => {
         const fetchUserInfo = async () => {
             if (!userId) return;
             try {
-                const res = await axios.get(`http://localhost:5000/api/v1/users/${userId}`, {
+                const res = await axios.get(`${BASE_URL}/api/v1/users/${userId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 if (res.data.status === 'success') {
@@ -64,7 +64,7 @@ const AdminOrderDetail = () => {
     const handleUpdateStatus = async () => {
         try {
             setUpdating(true);
-            const res = await axios.patch(`http://localhost:5000/api/v1/orders/${orderId}`, {
+            const res = await axios.patch(`${BASE_URL}/api/v1/orders/${orderId}`, {
                 status: newStatus,
                 payment_status: newPaymentStatus,
                 comment: comment || `Status updated by Admin`

@@ -6,6 +6,8 @@ import AuthContext from '../Context/Auth/authContext';
 import { Package, ChevronRight, ArrowRight, Clock, CheckCircle2, Truck, XCircle, RotateCw } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Orders = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -16,14 +18,14 @@ const Orders = () => {
         const fetchOrders = async () => {
             if (!isAuthenticated) return;
             try {
-                const res = await axios.get('http://localhost:5000/api/v1/orders', {
+                const res = await axios.get(`${BASE_URL}/api/v1/orders`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 if (res.data.status === 'success') {
                     setOrders(res.data.data.orders);
                 }
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 console.error('Error fetching orders:', error);
             } finally {
                 setLoading(false);

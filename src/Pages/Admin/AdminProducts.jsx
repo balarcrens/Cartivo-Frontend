@@ -26,6 +26,8 @@ import ProductFormModal from '../../Components/Admin/ProductFormModal';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const AdminProducts = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -38,7 +40,7 @@ const AdminProducts = () => {
     const fetchProducts = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/products?status=all', {
+            const res = await axios.get(`${BASE_URL}/api/v1/products?status=all`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -69,7 +71,7 @@ const AdminProducts = () => {
 
         if (result.isConfirmed) {
             try {
-                await axios.delete(`http://localhost:5000/api/v1/products/${id}`, {
+                await axios.delete(`${BASE_URL}/api/v1/products/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 fetchProducts();

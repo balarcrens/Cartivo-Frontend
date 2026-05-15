@@ -20,6 +20,8 @@ import BrandFormModal from '../../Components/Admin/BrandFormModal';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const AdminBrands = () => {
     const [brands, setBrands] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -31,7 +33,7 @@ const AdminBrands = () => {
     const fetchBrands = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('http://localhost:5000/api/v1/brands', {
+            const res = await axios.get(`${BASE_URL}/api/v1/brands`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.data.status === 'success') {
@@ -61,7 +63,7 @@ const AdminBrands = () => {
         });
         if (result.isConfirmed) {
             try {
-                await axios.delete(`http://localhost:5000/api/v1/brands/${id}`, {
+                await axios.delete(`${BASE_URL}/api/v1/brands/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 fetchBrands();

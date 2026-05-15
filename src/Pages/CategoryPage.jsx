@@ -7,6 +7,8 @@ import axios from 'axios';
 import FilterSidebar from '../Components/Product/FilterSidebar';
 import ProductCard from '../Components/Product/ProductCard';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const CategoryPage = () => {
     const { slug } = useParams();
     const location = useLocation();
@@ -48,8 +50,8 @@ const CategoryPage = () => {
     const fetchBrands = async () => {
         try {
             const url = slug === 'all'
-                ? `http://localhost:5000/api/v1/brands`
-                : `http://localhost:5000/api/v1/brands/${categoryId}`;
+                ? `${BASE_URL}/api/v1/brands`
+                : `${BASE_URL}/api/v1/brands/${categoryId}`;
             const res = await axios.get(url);
             setBrands(res.data.data.brands || []);
         } catch (error) {
@@ -61,7 +63,7 @@ const CategoryPage = () => {
     const fetchInitialData = async () => {
         try {
             const res = await axios.get(
-                'http://localhost:5000/api/v1/categories/tree'
+                `${BASE_URL}/api/v1/categories/tree`
             );
             setCategories(res.data.data.categories);
         } catch (error) {
@@ -77,7 +79,7 @@ const CategoryPage = () => {
             return;
         }
         try {
-            const res = await axios.get(`http://localhost:5000/api/v1/categories/slug/${slug}`);
+            const res = await axios.get(`${BASE_URL}/api/v1/categories/slug/${slug}`);
 
             setCategoryId(res.data.data.category.id);
             setCategoryPath(res.data.data.path || []);
@@ -96,7 +98,7 @@ const CategoryPage = () => {
             } else {
                 params.delete('category');
             }
-            const res = await axios.get(`http://localhost:5000/api/v1/products?${params.toString()}`);
+            const res = await axios.get(`${BASE_URL}/api/v1/products?${params.toString()}`);
             setProducts(res.data.data.products);
         } catch (error) {
     console.error(error);
