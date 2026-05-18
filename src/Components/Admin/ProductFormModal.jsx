@@ -21,7 +21,7 @@ import {
 import AuthContext from '../../Context/Auth/authContext';
 import toast from 'react-hot-toast';
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
 const ProductFormModal = ({ isOpen, onClose, product, onSave }) => {
     const { token } = useContext(AuthContext);

@@ -6,7 +6,7 @@ import { X, Upload, Save, Type, Link, Layers, ToggleLeft, ToggleRight, Trash2 } 
 import AuthContext from '../../Context/Auth/authContext';
 import toast from 'react-hot-toast';
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
 const HeroFormModal = ({ isOpen, onClose, banner, onSave }) => {
     const { token } = useContext(AuthContext);

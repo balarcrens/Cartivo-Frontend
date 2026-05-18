@@ -20,7 +20,7 @@ import BrandFormModal from '../../Components/Admin/BrandFormModal';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
 const AdminBrands = () => {
     const [brands, setBrands] = useState([]);

@@ -6,7 +6,7 @@ import AuthContext from '../Context/Auth/authContext';
 import { Package, ChevronRight, ArrowRight, Clock, CheckCircle2, Truck, XCircle, RotateCw } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);

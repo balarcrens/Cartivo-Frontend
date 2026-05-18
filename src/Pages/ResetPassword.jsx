@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Lock, Loader2, CheckCircle2, Eye, EyeClosed } from "lucide-react";
 import toast from 'react-hot-toast';
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
 export default function ResetPassword() {
     const { token } = useParams();

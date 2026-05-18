@@ -7,7 +7,7 @@ import axios from 'axios';
 import AuthContext from '../Context/Auth/authContext';
 import confetti from "canvas-confetti";
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
 export default function OrderSuccess() {
     const { orderId } = useParams();

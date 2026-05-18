@@ -16,7 +16,7 @@ import WishlistContext from '../../Context/Wishlist/WishlistContext';
 import { useContext, useEffect } from 'react';
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
 export default function Header() {
     const navigate = useNavigate();
