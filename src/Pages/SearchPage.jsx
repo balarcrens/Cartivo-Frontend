@@ -39,7 +39,7 @@ const SearchPage = () => {
             const res = await axios.get(`${BASE_URL}/api/v1/categories/tree`);
             setCategories(res.data.data.categories);
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error("Error fetching categories", error);
         }
     };
@@ -49,7 +49,7 @@ const SearchPage = () => {
             const res = await axios.get(`${BASE_URL}/api/v1/brands`);
             setBrands(res.data.data.brands || []);
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error("Error fetching brands", error);
         }
     };
@@ -62,7 +62,7 @@ const SearchPage = () => {
             const res = await axios.get(`${BASE_URL}/api/v1/products?${params.toString()}`);
             setProducts(res.data.data.products);
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error("Error fetching search results", error);
         } finally {
             setLoading(false);

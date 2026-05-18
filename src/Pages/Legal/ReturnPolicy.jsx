@@ -35,7 +35,7 @@ export default function ReturnPolicy() {
                         </div>
                     ))}
                 </div>
-                
+
                 <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
                     <ShieldCheck className="w-6 h-6 text-indigo-600" />
                     1. Our Return Commitment

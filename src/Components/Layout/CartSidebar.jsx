@@ -146,11 +146,11 @@ export default function CartSidebar() {
                                 <button
                                     onClick={async () => {
                                         const existingSession = JSON.parse(localStorage.getItem('checkout_session') || '[]');
-                                        
+
                                         // Merge cart items into session
                                         cartItems.forEach(cartItem => {
-                                            const existingIndex = existingSession.findIndex(sessionItem => 
-                                                sessionItem.product_id === cartItem.product_id && 
+                                            const existingIndex = existingSession.findIndex(sessionItem =>
+                                                sessionItem.product_id === cartItem.product_id &&
                                                 sessionItem.variant_id === cartItem.variant_id
                                             );
 

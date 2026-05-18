@@ -84,25 +84,25 @@ export default function FAQ() {
                             {section.category}
                         </h2>
                         <div className="space-y-4">
-                            {section.questions.filter(item => 
-                                item.q.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                            {section.questions.filter(item =>
+                                item.q.toLowerCase().includes(searchTerm.toLowerCase()) ||
                                 item.a.toLowerCase().includes(searchTerm.toLowerCase())
                             ).map((item, qIdx) => {
                                 const uniqueIdx = `${sIdx}-${qIdx}`;
                                 const isOpen = openIndex === uniqueIdx;
                                 return (
-                                    <div 
-                                        key={qIdx} 
+                                    <div
+                                        key={qIdx}
                                         className={`border transition-all duration-300 rounded-2xl overflow-hidden ${isOpen ? 'border-amber-200 bg-amber-50/10' : 'border-gray-100 bg-white hover:border-gray-200'}`}
                                     >
-                                        <button 
+                                        <button
                                             onClick={() => toggleFAQ(uniqueIdx)}
                                             className="w-full flex items-center justify-between p-6 text-left cursor-pointer"
                                         >
                                             <span className="text-sm font-bold text-gray-900 pr-8">{item.q}</span>
                                             <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
                                         </button>
-                                        <div 
+                                        <div
                                             className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
                                         >
                                             <div className="p-6 pt-0 text-sm text-gray-500 leading-relaxed font-inter">

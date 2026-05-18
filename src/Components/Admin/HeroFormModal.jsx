@@ -95,7 +95,7 @@ const HeroFormModal = ({ isOpen, onClose, banner, onSave }) => {
                 toast.success(`Banner ${method === 'patch' ? 'updated' : 'added'} successfullly`);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error saving banner:', error);
             toast.error('Failed to save banner');
         } finally {

@@ -43,7 +43,7 @@ const AdminUsers = () => {
                 setUsers(res.data.data.users);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Error fetching users:', error);
         } finally {
             setLoading(false);
@@ -64,7 +64,7 @@ const AdminUsers = () => {
                 toast.success('User updated successfullly');
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Error updating user:', error);
         }
     };
@@ -88,7 +88,7 @@ const AdminUsers = () => {
                 setUsers(users.filter(user => user.id !== id));
                 toast.success('User deleted successfullly');
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 toast.error('Error deleting user:', error);
             }
         }

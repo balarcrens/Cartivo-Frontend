@@ -90,7 +90,7 @@ const CouponFormModal = ({ isOpen, onClose, coupon, onSave }) => {
                 toast.success(`Coupon ${method === 'patch' ? 'updated' : 'added'} successfullly`);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error saving coupon:', error);
             toast.error('Failed to save coupon');
         } finally {

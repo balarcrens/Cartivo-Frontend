@@ -27,7 +27,7 @@ export default function WishlistProvider({ children }) {
                 setWishlistItems(res.data.data.wishlist);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error fetching wishlist:', error);
         } finally {
             setLoading(false);
@@ -55,7 +55,7 @@ export default function WishlistProvider({ children }) {
                 fetchWishlist();
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error adding to wishlist:', error);
         }
     };
@@ -72,7 +72,7 @@ export default function WishlistProvider({ children }) {
                 setWishlistItems(prev => prev.filter(item => item.product_id !== productId));
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error removing FROM public.wishlist:', error);
         }
     };

@@ -47,7 +47,7 @@ const AdminProducts = () => {
                 setProducts(res.data.data.products);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error fetching products:', error);
         } finally {
             setLoading(false);
@@ -77,7 +77,7 @@ const AdminProducts = () => {
                 fetchProducts();
                 toast.success('Product deleted successfullly');
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 toast.error('Error deleting product:', error);
             }
         }

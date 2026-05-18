@@ -40,7 +40,7 @@ const AdminBrands = () => {
                 setBrands(res.data.data.brands);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Error fetching brands:', error);
         } finally {
             setLoading(false);
@@ -69,7 +69,7 @@ const AdminBrands = () => {
                 fetchBrands();
                 toast.success('Brand deleted successfullly');
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 toast.error('Failed to delete brand', error);
             }
         }

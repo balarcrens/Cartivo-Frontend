@@ -159,7 +159,7 @@ const ProductFormModal = ({ isOpen, onClose, product, onSave }) => {
                 setFormData(prev => ({ ...prev, variants: res.data.data.variants }));
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error fetching variants:', error);
         }
     };
@@ -189,7 +189,7 @@ const ProductFormModal = ({ isOpen, onClose, product, onSave }) => {
             const res = await axios.get(`${BASE_URL}/api/v1/categories`);
             setCategories(res.data.data.categories);
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error(error);
         }
     };
@@ -199,7 +199,7 @@ const ProductFormModal = ({ isOpen, onClose, product, onSave }) => {
             const res = await axios.get(`${BASE_URL}/api/v1/brands`);
             setBrands(res.data.data.brands);
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error(error);
         }
     };
@@ -211,7 +211,7 @@ const ProductFormModal = ({ isOpen, onClose, product, onSave }) => {
             });
             setVendors(res.data.data.vendors);
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error(error);
         }
     };
@@ -325,7 +325,7 @@ const ProductFormModal = ({ isOpen, onClose, product, onSave }) => {
                 toast.success(`Product ${method === 'patch' ? 'updated' : 'added'} successfullly`);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error saving product:', error);
             toast.error('Failed to save product');
         } finally {

@@ -8,7 +8,7 @@ const safeParse = (value) => {
     try {
         return JSON.parse(value);
     } catch (error) {
-    console.error(error);
+        console.error(error);
         console.error('JSON parse error:', error);
         return null;
     }

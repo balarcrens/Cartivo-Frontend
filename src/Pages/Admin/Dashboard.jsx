@@ -37,7 +37,7 @@ const Dashboard = () => {
                 setStats(statsRes.data.data);
                 setRecentOrders(ordersRes.data.data.orders);
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 toast.error('Error fetching dashboard data:', error);
             } finally {
                 setLoading(false);

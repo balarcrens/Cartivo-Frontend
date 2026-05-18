@@ -48,7 +48,7 @@ export default function Header() {
                 setCategories(res.data.data.categories);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error fetching categories:', error);
         }
     };

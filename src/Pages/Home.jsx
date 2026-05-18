@@ -41,7 +41,7 @@ export default function Home() {
                 setHomeData(res.data.data);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error fetching home data:', error);
         } finally {
             setLoading(false);

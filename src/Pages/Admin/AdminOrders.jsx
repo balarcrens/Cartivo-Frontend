@@ -38,7 +38,7 @@ const AdminOrders = () => {
                     setOrders(res.data.data.orders);
                 }
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 toast.error('Error fetching orders', error);
             } finally {
                 setLoading(false);

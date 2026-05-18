@@ -48,7 +48,7 @@ const AdminReturns = () => {
                 setReturns(res.data.data.returns);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Error fetching return requests');
             console.error(error);
         } finally {
@@ -83,7 +83,7 @@ const AdminReturns = () => {
                 setSelectedReturn(null);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Failed to update return request');
             console.error(error);
         } finally {

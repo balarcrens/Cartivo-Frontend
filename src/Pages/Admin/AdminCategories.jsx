@@ -42,7 +42,7 @@ const AdminCategories = () => {
                 setCategories(res.data.data.categories);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Error fetching categories:', error);
         } finally {
             setLoading(false);
@@ -72,7 +72,7 @@ const AdminCategories = () => {
                 fetchCategories();
                 toast.success('Category deleted successfullly');
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 toast.error('Failed to delete category', error);
             }
         }

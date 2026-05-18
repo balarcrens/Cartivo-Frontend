@@ -38,7 +38,7 @@ const AdminHero = () => {
                 setBanners(res.data.data.banners);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Error fetching banners:', error);
         } finally {
             setLoading(false);
@@ -68,7 +68,7 @@ const AdminHero = () => {
                 fetchBanners();
                 toast.success('Banner deleted successfullly');
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 toast.error('Error deleting banner:', error);
             }
         }

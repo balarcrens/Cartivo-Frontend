@@ -42,7 +42,7 @@ const AdminContacts = () => {
                 setMessages(res.data.data);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Error fetching messages');
             console.error(error);
         } finally {
@@ -73,7 +73,7 @@ const AdminContacts = () => {
                 fetchMessages();
                 toast.success('Message deleted successfully');
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 toast.error('Failed to delete message');
                 console.error(error);
             }
@@ -88,7 +88,7 @@ const AdminContacts = () => {
             toast.success(`Message marked as ${status}`);
             fetchMessages();
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Failed to update status');
             console.error(error);
         }

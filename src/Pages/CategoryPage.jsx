@@ -55,7 +55,7 @@ const CategoryPage = () => {
             const res = await axios.get(url);
             setBrands(res.data.data.brands || []);
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error("Error fetching brands", error);
         }
     };
@@ -67,7 +67,7 @@ const CategoryPage = () => {
             );
             setCategories(res.data.data.categories);
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error("Error fetching initial data", error);
         }
     };
@@ -84,7 +84,7 @@ const CategoryPage = () => {
             setCategoryId(res.data.data.category.id);
             setCategoryPath(res.data.data.path || []);
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error("Error fetching category info", error);
         }
     };
@@ -101,7 +101,7 @@ const CategoryPage = () => {
             const res = await axios.get(`${BASE_URL}/api/v1/products?${params.toString()}`);
             setProducts(res.data.data.products);
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error("Error fetching products", error);
         } finally {
             setLoading(false);

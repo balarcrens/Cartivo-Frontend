@@ -86,7 +86,7 @@ export default function OrderSuccess() {
                     setOrder(res.data.data.order);
                 }
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 console.error('Error fetching order:', error);
             } finally {
                 setLoading(false);

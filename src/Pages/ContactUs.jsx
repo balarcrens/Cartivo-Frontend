@@ -29,7 +29,7 @@ export default function ContactUs() {
                 });
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error submitting form:', error);
             toast.error(error.response?.data?.message || 'Something went wrong. Please try again.');
         } finally {

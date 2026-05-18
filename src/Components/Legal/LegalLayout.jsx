@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function LegalLayout({ title, lastUpdated, children }) {
     const navigate = useNavigate();
-    
+
     return (
         <div className="min-h-screen bg-white">
             <div className="relative overflow-hidden bg-gray-50 py-20 border-b border-gray-100">

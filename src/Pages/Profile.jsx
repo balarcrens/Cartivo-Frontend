@@ -55,7 +55,7 @@ const Profile = () => {
                 setAddresses(data.data.addresses);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error fetching addresses:', error);
         } finally {
             setIsAddrLoading(false);
@@ -90,7 +90,7 @@ const Profile = () => {
                 setMessage({ type: 'error', text: data.message || 'Failed to update profile' });
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             setMessage({ type: 'error', text: 'Something went wrong. Please try again.' });
             console.error(error);
         } finally {
@@ -153,7 +153,7 @@ const Profile = () => {
                 });
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Failed to save address');
             console.error(error);
         } finally {
@@ -181,7 +181,7 @@ const Profile = () => {
             });
             fetchAddresses();
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Failed to delete the address');
             console.error(error);
         }
@@ -196,7 +196,7 @@ const Profile = () => {
             });
             fetchAddresses();
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Failed set default address:');
             console.error(error);
         }

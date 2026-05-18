@@ -60,7 +60,7 @@ const CategoryFormModal = ({ isOpen, onClose, category, onSave }) => {
                 : res.data.data.categories;
             setCategories(filteredCats);
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error fetching categories:', error);
         }
     };
@@ -94,7 +94,7 @@ const CategoryFormModal = ({ isOpen, onClose, category, onSave }) => {
                 toast.success(`Category ${method === 'patch' ? 'updated' : 'added'} successfullly`);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error saving category:', error);
             toast.error('Failed to save category');
         } finally {

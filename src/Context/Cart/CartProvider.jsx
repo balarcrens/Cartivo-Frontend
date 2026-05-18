@@ -34,7 +34,7 @@ export default function CartProvider({ children }) {
                 setCartCount(res.data.data.totalItems);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             console.error('Error fetching cart:', error);
         } finally {
             setLoading(false);
@@ -65,7 +65,7 @@ export default function CartProvider({ children }) {
                 setIsCartOpen(true);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Failed to add item to cart');
             console.error(error);
         }
@@ -80,7 +80,7 @@ export default function CartProvider({ children }) {
                 fetchCart();
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Failed to remove item from cart');
             console.error(error);
         }
@@ -97,7 +97,7 @@ export default function CartProvider({ children }) {
                 setCartSubtotal(0);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Failed to clear cart');
             console.error(error);
         }
@@ -116,7 +116,7 @@ export default function CartProvider({ children }) {
                 fetchCart();
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Failed to update quantity');
             console.error(error);
         }

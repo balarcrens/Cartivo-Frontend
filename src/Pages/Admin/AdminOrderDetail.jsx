@@ -7,6 +7,8 @@ import AuthContext from '../../Context/Auth/authContext';
 import { ChevronLeft, MapPin, CreditCard, Calendar, User, Mail, Phone, Save, History } from 'lucide-react';
 import toast from 'react-hot-toast';
 
+const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
+
 const AdminOrderDetail = () => {
     const { orderId } = useParams();
     const [orderData, setOrderData] = useState(null);
@@ -32,7 +34,7 @@ const AdminOrderDetail = () => {
                 setUserId(res.data.data.order.user_id);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Failed to fetch order detail', error);
         } finally {
             setLoading(false);
@@ -54,7 +56,7 @@ const AdminOrderDetail = () => {
                     setUserData(res.data.data.user);
                 }
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 toast.error('Failed to fetch user', error);
             }
         }
@@ -78,7 +80,7 @@ const AdminOrderDetail = () => {
                 fetchOrderDetail();
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Failed to update order', error);
         } finally {
             setUpdating(false);

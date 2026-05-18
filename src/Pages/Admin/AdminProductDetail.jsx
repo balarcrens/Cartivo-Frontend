@@ -29,6 +29,8 @@ import ProductFormModal from '../../Components/Admin/ProductFormModal';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
+const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
+
 const NestedAttribute = ({ label, value, level = 0 }) => {
     const [isExpanded, setIsExpanded] = useState(true);
     const isObject = typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -105,7 +107,7 @@ const AdminProductDetail = () => {
                 setVariants(res.data.data.variants);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Error fetching product detail:', error);
         } finally {
             setLoading(false);
@@ -135,7 +137,7 @@ const AdminProductDetail = () => {
                 navigate('/admin/products');
                 toast.success('Product deleted successfullly');
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 toast.error('Error deleting product:', error);
             }
         }

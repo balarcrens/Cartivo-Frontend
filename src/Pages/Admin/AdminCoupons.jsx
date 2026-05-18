@@ -43,7 +43,7 @@ const AdminCoupons = () => {
                 setCoupons(res.data.data.coupons);
             }
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error('Error fetching coupons:', error);
         } finally {
             setLoading(false);
@@ -73,7 +73,7 @@ const AdminCoupons = () => {
                 fetchCoupons();
                 toast.success('Coupon deleted successfullly');
             } catch (error) {
-    console.error(error);
+                console.error(error);
                 toast.error('Failed to delete Coupon', error);
             }
         }
