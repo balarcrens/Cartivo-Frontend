@@ -41,12 +41,12 @@ export default function AddressForm() {
             const res = await axios.post(`${BASE_URL}/api/v1/auth/signup`, payload);
             if (res.data.success || res.data.token) {
                 await login(res.data.data.user, res.data.token);
-                navigate('/');
                 clearSignupData();
                 toast.success('Registered Successfully');
             }
+            navigate('/');
         } catch (error) {
-    console.error(error);
+            console.error(error);
             toast.error("Registration failed");
             setError(error.response?.data?.error || "Registration failed. Please try again.");
         } finally {
@@ -70,7 +70,7 @@ export default function AddressForm() {
                 <div className="hidden md:block relative overflow-hidden group">
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-600/80 to-indigo-800/80 z-10" />
                     <img
-                        src="https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=800&q=80"
+                        src="/register-bg.avif"
                         alt="Logistics" loading='lazy'
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />

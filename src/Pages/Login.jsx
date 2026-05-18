@@ -60,7 +60,7 @@ export default function Login() {
                 <div className="hidden md:block relative overflow-hidden group">
                     <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/80 to-purple-700/80 z-10" />
                     <img
-                        src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80"
+                        src="/login-bg.avif"
                         alt="Shopping" loading='lazy'
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
@@ -107,7 +107,7 @@ export default function Login() {
                         <div className="space-y-2">
                             <div className="flex justify-between items-center px-1">
                                 <label className="text-sm font-semibold text-gray-700">Password</label>
-                                <Link to="#" className="text-xs font-semibold text-indigo-600 hover:text-indigo-700">Forgot?</Link>
+                                <Link to="/auth/forgot-password" size="sm" className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 transition-colors">Forgot Password?</Link>
                             </div>
                             <div className="relative group">
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition-colors" />

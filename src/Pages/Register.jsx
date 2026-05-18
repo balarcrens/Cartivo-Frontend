@@ -55,7 +55,7 @@ export default function Register() {
                 <div className="hidden md:block relative overflow-hidden group">
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-600/80 to-indigo-700/80 z-10" />
                     <img
-                        src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1600&q=80"
+                        src="/register-bg.avif"
                         alt="Fashion" loading='lazy'
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />

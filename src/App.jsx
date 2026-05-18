@@ -11,6 +11,8 @@ import { Toaster } from 'react-hot-toast';
 const Home = lazy(() => import('./Pages/Home'));
 const Login = lazy(() => import('./Pages/Login'));
 const Register = lazy(() => import('./Pages/Register'));
+const ForgotPassword = lazy(() => import('./Pages/ForgotPassword'));
+const ResetPassword = lazy(() => import('./Pages/ResetPassword'));
 const AddressForm = lazy(() => import('./Pages/AddressForm'));
 const NotFound = lazy(() => import('./Pages/NotFound'));
 const CategoryPage = lazy(() => import('./Pages/CategoryPage'));
@@ -76,6 +78,8 @@ function App() {
 						<Route index element={<Home />} />
 						<Route path='/auth/signin' element={<Login />} />
 						<Route path='/auth/signup' element={<Register />} />
+						<Route path='/auth/forgot-password' element={<ForgotPassword />} />
+						<Route path='/auth/reset-password/:token' element={<ResetPassword />} />
 						<Route path='/auth/signup/address' element={<AddressForm />} />
 						<Route path='/category/:slug' element={<CategoryPage />} />
 						<Route path='/product/:slug' element={<ProductDetail />} />
