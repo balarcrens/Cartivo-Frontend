@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock, ShieldCheck, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
@@ -229,7 +230,7 @@ export default function ContactUs() {
                         <div>
                             <h4 className="text-xl font-bold text-gray-900 mb-2 font-outfit">Help Center</h4>
                             <p className="text-gray-500 font-inter text-sm">Browse our extensive FAQ database for quick answers to common questions.</p>
-                            <a href="#" className="text-indigo-600 font-bold hover:underline mt-2 inline-block text-sm">Visit FAQ Center</a>
+                            <Link to="/faq" className="text-indigo-600 font-bold hover:underline mt-2 inline-block text-sm">Visit FAQ Center</Link>
                         </div>
                     </div>
                 </div>

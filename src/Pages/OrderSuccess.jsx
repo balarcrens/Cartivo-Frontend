@@ -18,26 +18,42 @@ export default function OrderSuccess() {
     const [celebrated, setCelebrated] = useState(false);
 
     const fireCrackers = () => {
-        var duration = 5 * 1000;
-        var animationEnd = Date.now() + duration;
-        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+        var count = 200;
+        var defaults = {
+            origin: { y: -0.3 },
+            angle: 270
+        };
 
-        function randomInRange(min, max) {
-            return Math.random() * (max - min) + min;
+        function fire(particleRatio, opts) {
+            confetti({
+                ...defaults,
+                ...opts,
+                particleCount: Math.floor(count * particleRatio)
+            });
         }
 
-        var interval = setInterval(function () {
-            var timeLeft = animationEnd - Date.now();
-
-            if (timeLeft <= 0) {
-                return clearInterval(interval);
-            }
-
-            var particleCount = 50 * (timeLeft / duration);
-
-            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
-            confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
-        }, 250);
+        fire(0.25, {
+            spread: 26,
+            startVelocity: 55,
+        });
+        fire(0.2, {
+            spread: 60,
+        });
+        fire(0.35, {
+            spread: 100,
+            decay: 0.91,
+            scalar: 0.8
+        });
+        fire(0.1, {
+            spread: 120,
+            startVelocity: 25,
+            decay: 0.92,
+            scalar: 1.2
+        });
+        fire(0.1, {
+            spread: 120,
+            startVelocity: 45,
+        });
     };
 
     const palettes = [
@@ -48,7 +64,7 @@ export default function OrderSuccess() {
     ];
 
     const fireSideCannons = () => {
-        const duration = 2 * 1000;
+        const duration = 1 * 1000;
         const end = Date.now() + duration;
 
         (function frame() {
@@ -182,7 +198,7 @@ export default function OrderSuccess() {
                         initial={{ x: -20, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ delay: 0.4 }}
-                        className="bg-white p-10 border border-gray-100 shadow-sm relative overflow-hidden"
+                        className="bg-white p-4 sm:p-6 border border-gray-100 shadow-sm relative overflow-hidden"
                     >
                         <div className="absolute top-0 right-0 p-4 opacity-[0.03]">
                             <Package className="w-32 h-32 text-gray-900" />

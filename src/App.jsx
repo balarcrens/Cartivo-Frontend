@@ -117,8 +117,6 @@ function App() {
 							<Route path="hero" element={<AdminHero />} />
 							<Route path="contacts" element={<AdminContacts />} />
 						</Route>
-
-
 					</Route>
 
 					<Route path="*" element={<NotFound />} />

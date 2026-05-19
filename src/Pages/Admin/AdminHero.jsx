@@ -94,7 +94,7 @@ const AdminHero = () => {
     }
 
     return (
-        <div className="space-y-6 min-h-screen animate-in fade-in slide-in-from-bottom-4 duration-1000 pb-12 font-outfit">
+        <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-800 pb-12 font-outfit">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                     <h1 className="text-3xl font-black tracking-tight text-gray-900 mb-2 uppercase">Hero Management</h1>

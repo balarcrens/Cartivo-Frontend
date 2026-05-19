@@ -17,7 +17,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
@@ -163,9 +163,9 @@ export default function Home() {
                     <div className="mx-auto px-4 lg:px-10">
                         <div className="flex items-center justify-between mb-16 px-4">
                             <h2 className="text-2xl font-semibold text-gray-900 tracking-tight uppercase">Curated Categories</h2>
-                            <a href="/category/all" className="text-gray-400 hover:text-gray-900 font-medium text-sm uppercase tracking-widest transition-all flex items-center gap-2">
+                            <Link href="/category/all" className="text-gray-400 hover:text-gray-900 font-medium text-sm uppercase tracking-widest transition-all flex items-center gap-2">
                                 Explore All <ArrowRight className="w-4 h-4" />
-                            </a>
+                            </Link>
                         </div>
 
                         <Swiper
@@ -191,10 +191,10 @@ export default function Home() {
                                 </SwiperSlide>
                             ))}
 
-                            <button className="cat-prev absolute -left-4 top-[40%] -translate-y-1/2 z-20 p-4 bg-white shadow-xl opacity-0 group-hover:opacity-100 transition-all hover:bg-gray-900 hover:text-white">
+                            <button className="cat-prev cursor-pointer absolute -left-4 top-[40%] -translate-y-1/2 z-20 p-4 bg-white shadow-xl opacity-0 group-hover:opacity-100 transition-all hover:bg-gray-900 hover:text-white">
                                 <ChevronLeft className="w-5 h-5" />
                             </button>
-                            <button className="cat-next absolute -right-4 top-[40%] -translate-y-1/2 z-20 p-4 bg-white shadow-xl opacity-0 group-hover:opacity-100 transition-all hover:bg-gray-900 hover:text-white">
+                            <button className="cat-next cursor-pointer absolute -right-4 top-[40%] -translate-y-1/2 z-20 p-4 bg-white shadow-xl opacity-0 group-hover:opacity-100 transition-all hover:bg-gray-900 hover:text-white">
                                 <ChevronRight className="w-5 h-5" />
                             </button>
                         </Swiper>
@@ -231,10 +231,10 @@ export default function Home() {
                                 ))}
                             </Swiper>
 
-                            <button className="featured-prev absolute left-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
+                            <button className="featured-prev cursor-pointer absolute left-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
                                 <ChevronLeft className="w-4 h-4" />
                             </button>
-                            <button className="featured-next absolute right-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
+                            <button className="featured-next cursor-pointer absolute right-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
                                 <ChevronRight className="w-4 h-4" />
                             </button>
                         </div>
@@ -298,10 +298,10 @@ export default function Home() {
                                 ))}
                             </Swiper>
 
-                            <button className="winter-prev absolute left-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
+                            <button className="winter-prev cursor-pointer absolute left-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
                                 <ChevronLeft className="w-4 h-4" />
                             </button>
-                            <button className="winter-next absolute right-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
+                            <button className="winter-next cursor-pointer absolute right-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
                                 <ChevronRight className="w-4 h-4" />
                             </button>
                         </div>
@@ -387,10 +387,10 @@ export default function Home() {
                                 ))}
                             </Swiper>
 
-                            <button className="grocery-prev absolute left-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
+                            <button className="grocery-prev cursor-pointer absolute left-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
                                 <ChevronLeft className="w-4 h-4" />
                             </button>
-                            <button className="grocery-next absolute right-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
+                            <button className="grocery-next cursor-pointer absolute right-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
                                 <ChevronRight className="w-4 h-4" />
                             </button>
                         </div>
@@ -427,10 +427,10 @@ export default function Home() {
                                 ))}
                             </Swiper>
 
-                            <button className="home-prev absolute left-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
+                            <button className="home-prev cursor-pointer absolute left-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
                                 <ChevronLeft className="w-4 h-4" />
                             </button>
-                            <button className="home-next absolute right-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
+                            <button className="home-next cursor-pointer absolute right-0 top-[40%] -translate-y-1/2 z-20 p-3 bg-white shadow-lg opacity-0 group-hover/swiper:opacity-100 transition-all hover:bg-gray-900 hover:text-white border border-gray-100">
                                 <ChevronRight className="w-4 h-4" />
                             </button>
                         </div>
