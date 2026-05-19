@@ -1,41 +1,32 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import AuthContext from "../Context/Auth/authContext";
 import { User, Mail, Phone, Lock, ArrowRight, Loader2, EyeClosed, Eye } from "lucide-react";
+import { useForm } from "react-hook-form";
 
 export default function Register() {
     const { signupData, updateSignupData } = useContext(AuthContext);
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        password: "",
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset
+    } = useForm({
+        defaultValues: {
+            name: signupData?.name || "",
+            email: signupData?.email || "",
+            phone: signupData?.phone || "",
+            password: signupData?.password || "",
+        }
     });
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [isShowIcon, setIsShowIcon] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (signupData) {
-            setFormData({
-                name: signupData.name || "",
-                email: signupData.email || "",
-                phone: signupData.phone || "",
-                password: signupData.password || "",
-            });
-        }
-    }, [signupData]);
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        updateSignupData(formData);
+    const onSubmit = (data) => {
+        updateSignupData(data);
         navigate("/auth/signup/address");
     };
 
@@ -84,72 +75,132 @@ export default function Register() {
                         </div>
                         <h1 className="text-3xl font-outfit font-bold text-gray-900 mb-2">Create Account</h1>
                         <p className="text-gray-500 font-medium text-sm flex items-center gap-2">
-                            <span className="w-5 h-5 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center text-[10px] font-bold">1</span>
+                            <span className="w-5 h-5 rounded-full pt-1 bg-indigo-50 text-indigo-600 flex items-center justify-center text-[10px] font-bold">1</span>
                             Personal Information
                         </p>
                     </div>
 
-                    <form className="space-y-5" onSubmit={handleSubmit}>
+                    <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
                         <div className="grid grid-cols-1 gap-5">
                             <div className="space-y-2">
-                                <label className="text-sm font-semibold text-gray-700 ml-1">Full Name</label>
+                                <label className="text-sm font-semibold text-gray-700 ml-1">Full Name
+                                    <span className="text-red-500"> *</span>
+                                </label>
                                 <div className="relative group">
                                     <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition-colors" />
                                     <input
                                         name="name"
                                         type="text"
                                         placeholder="Full Name"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        required
+                                        {...register("name", {
+                                            required: "Full name is required",
+                                            minLength: {
+                                                value: 3,
+                                                message: "Minimum 3 characters"
+                                            }
+                                        })}
                                         className="w-full pl-12 pr-4 py-3.5 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 transition-all font-medium text-gray-900 placeholder:text-gray-400"
                                     />
                                 </div>
+
+                                {errors.name && (
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        className="text-red-600 px-2 text-sm rounded-sm font-medium"
+                                    >
+                                        {errors.name.message}
+                                    </motion.div>
+                                )}
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-sm font-semibold text-gray-700 ml-1">Email</label>
+                                <label className="text-sm font-semibold text-gray-700 ml-1">Email
+                                    <span className="text-red-500"> *</span>
+                                </label>
                                 <div className="relative group">
                                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition-colors" />
                                     <input
                                         name="email"
                                         type="email"
                                         placeholder="gmail@example.com"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        required
+                                        {...register("email", {
+                                            required: "Email is required",
+                                            pattern: {
+                                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                                message: "Invalid email address"
+                                            }
+                                        })}
                                         className="w-full pl-12 pr-4 py-3.5 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 transition-all font-medium text-gray-900 placeholder:text-gray-400"
                                     />
                                 </div>
+
+                                {errors.email && (
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        className="text-red-600 px-2 text-sm rounded-sm font-medium"
+                                    >
+                                        {errors.email.message}
+                                    </motion.div>
+                                )}
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-sm font-semibold text-gray-700 ml-1">Phone Number</label>
+                                <label className="text-sm font-semibold text-gray-700 ml-1">Phone Number
+                                    <span className="text-red-500"> *</span>
+                                </label>
                                 <div className="relative group">
                                     <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition-colors" />
                                     <input
                                         name="phone"
                                         type="tel"
                                         placeholder="12345 67890"
-                                        value={formData.phone}
-                                        onChange={handleChange}
-                                        required
+                                        {...register("phone", {
+                                            required: "Phone number is required",
+                                            pattern: {
+                                                value: /^[0-9]{10}$/,
+                                                message: "Enter valid 10 digit phone number"
+                                            }
+                                        })}
                                         className="w-full pl-12 pr-4 py-3.5 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 transition-all font-medium text-gray-900 placeholder:text-gray-400"
                                     />
                                 </div>
+
+                                {errors.phone && (
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        className="text-red-600 px-2 text-sm rounded-sm font-medium"
+                                    >
+                                        {errors.phone.message}
+                                    </motion.div>
+                                )}
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-sm font-semibold text-gray-700 ml-1">Password</label>
+                                <label className="text-sm font-semibold text-gray-700 ml-1">Password
+                                    <span className="text-red-500"> *</span>
+                                </label>
                                 <div className="relative group">
                                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition-colors" />
                                     <input
                                         name="password"
                                         type={isShowPassword ? "text" : "password"}
                                         placeholder="••••••••"
-                                        value={formData.password}
-                                        onChange={handleChange}
-                                        required
+                                        {...register("password", {
+                                            required: "Password is required",
+                                            minLength: {
+                                                value: 8,
+                                                message: "Password must be at least 8 characters"
+                                            },
+                                            pattern: {
+                                                value:
+                                                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$/,
+                                                message:
+                                                    "Password must contain uppercase, lowercase, number and special character"
+                                            }
+                                        })}
                                         onInput={() => { setIsShowIcon(true) }}
                                         className="w-full pl-12 pr-12 py-3.5 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 transition-all font-medium text-gray-900 placeholder:text-gray-400"
                                     />
@@ -162,7 +213,17 @@ export default function Register() {
                                             )}
                                         </div>
                                     )}
+
                                 </div>
+                                {errors.password && (
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        className="text-red-600 px-2 text-sm rounded-sm font-medium"
+                                    >
+                                        {errors.password.message}
+                                    </motion.div>
+                                )}
                             </div>
                         </div>
 

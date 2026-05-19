@@ -163,11 +163,10 @@ const AdminHero = () => {
                     </div>
                 ))}
 
-                <div
-                    onClick={() => {
-                        handleAdd();
-                        window.scroll(0, 0);
-                    }}
+                <div onClick={() => {
+                    handleAdd();
+                    window.scroll(0, 0);
+                }}
                     className="group aspect-square md:aspect-auto rounded-md border-2 border-dashed border-gray-200 hover:border-indigo-400 bg-gray-50/50 hover:bg-indigo-50/10 transition-all duration-500 cursor-pointer flex flex-col items-center justify-center p-12 text-center"
                 >
                     <div className="w-20 h-20 rounded-full bg-white shadow-sm flex items-center justify-center group-hover:scale-110 group-hover:rotate-90 transition-transform duration-500 mb-6">

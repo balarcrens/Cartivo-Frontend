@@ -53,6 +53,7 @@ export default function WishlistProvider({ children }) {
 
             if (res.data.status === 'success') {
                 fetchWishlist();
+                toast.success('Product added to wishlist');
             }
         } catch (error) {
             console.error(error);
@@ -70,6 +71,7 @@ export default function WishlistProvider({ children }) {
 
             if (res.status === 204 || res.data.status === 'success') {
                 setWishlistItems(prev => prev.filter(item => item.product_id !== productId));
+                toast.success('Product removed from wishlist');
             }
         } catch (error) {
             console.error(error);

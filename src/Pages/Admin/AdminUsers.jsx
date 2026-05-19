@@ -232,7 +232,7 @@ const AdminUsers = () => {
                                             </div>
                                         </td>
                                         <td className="px-8 py-6 text-right">
-                                            <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <div className="flex items-center justify-end gap-2 md:opacity-0 group-hover:opacity-100 transition-opacity">
                                                 <button
                                                     onClick={() => handleDeleteUser(user.id)}
                                                     className="p-2.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-2xl transition-all cursor-pointer"
@@ -269,9 +269,9 @@ const AdminUsers = () => {
                     </table>
                 </div>
 
-                <div className="px-8 py-6 border-t border-gray-50 flex items-center justify-between bg-gray-50/30">
+                <div className="px-8 py-5 border-t border-gray-50 flex items-center justify-between bg-gray-50/30">
                     <p className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em]">
-                        Displaying {filteredUsers.length} of {users.length} Registered Members
+                        {filteredUsers.length} of {users.length} Members
                     </p>
                     <div className="flex items-center gap-3">
                         <button className="p-2.5 rounded-2xl border border-gray-200 bg-white text-gray-400 hover:text-black hover:border-black transition-all cursor-not-allowed opacity-50">

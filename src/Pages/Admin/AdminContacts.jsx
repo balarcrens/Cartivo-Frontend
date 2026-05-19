@@ -238,7 +238,7 @@ const AdminContacts = () => {
                                             </span>
                                         </td>
                                         <td className="px-6 py-6 text-right">
-                                            <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                            <div className="flex items-center justify-end gap-2 md:opacity-0 group-hover:opacity-100 transition-all duration-300">
                                                 {msg.status === 'pending' && (
                                                     <button
                                                         onClick={() => updateStatus(msg.id, 'read')}
@@ -301,9 +301,9 @@ const AdminContacts = () => {
                     </table>
                 </div>
 
-                <div className="px-6 py-4 border-t border-gray-50 flex items-center justify-between bg-gray-50/30">
+                <div className="px-8 py-5 border-t border-gray-50 flex items-center justify-between bg-gray-50/30">
                     <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
-                        Showing {filteredMessages.length} of {messages.length} inquiries
+                        {filteredMessages.length} of {messages.length} inquiries
                     </p>
                     <div className="flex items-center gap-2">
                         <button className="p-2 rounded-xl border border-gray-200 bg-white text-gray-400 cursor-not-allowed opacity-50">

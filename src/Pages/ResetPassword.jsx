@@ -5,35 +5,34 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { Lock, Loader2, CheckCircle2, Eye, EyeClosed } from "lucide-react";
 import toast from 'react-hot-toast';
+import { useForm } from "react-hook-form";
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
 export default function ResetPassword() {
     const { token } = useParams();
     const navigate = useNavigate();
-
-    const [formData, setFormData] = useState({ password: "", confirmPassword: "" });
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm({
+        defaultValues: {
+            email: "",
+            password: ""
+        }
+    });
     const [loading, setLoading] = useState(false);
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
     const [success, setSuccess] = useState(false);
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        if (formData.password !== formData.confirmPassword) {
-            return toast.error("Passwords do not match");
-        }
-
+    const onSubmit = async (data) => {
         setLoading(true);
 
         try {
             const res = await axios.patch(`${BASE_URL}/api/v1/auth/reset-password/${token}`, {
-                password: formData.password
+                password: data.password
             });
 
             if (res.data.status === 'success') {
@@ -56,7 +55,7 @@ export default function ResetPassword() {
                 <motion.div
                     initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className="w-full max-w-md bg-white rounded-[2rem] p-12 text-center shadow-xl shadow-indigo-50/50"
+                    className="w-full max-w-md bg-white rounded-[2rem] p-12 text-center shadow-md shadow-indigo-50/50"
                 >
                     <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-8 text-green-500">
                         <CheckCircle2 className="w-10 h-10" />
@@ -94,7 +93,7 @@ export default function ResetPassword() {
                     <p className="text-gray-500 font-light">Please create a new password that you don't use on other services.</p>
                 </div>
 
-                <form className="space-y-6" onSubmit={handleSubmit}>
+                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                     <div className="space-y-2">
                         <label className="text-sm font-semibold text-gray-700 ml-1">New Password</label>
                         <div className="relative group">
@@ -102,10 +101,20 @@ export default function ResetPassword() {
                             <input
                                 type={isShowPassword ? "text" : "password"}
                                 name="password"
-                                value={formData.password}
-                                onChange={handleChange}
+                                {...register("password", {
+                                    required: "Password is required",
+                                    minLength: {
+                                        value: 8,
+                                        message: "Password must be at least 8 characters"
+                                    },
+                                    pattern: {
+                                        value:
+                                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$/,
+                                        message:
+                                            "Password must contain uppercase, lowercase, number and special character"
+                                    }
+                                })}
                                 placeholder="••••••••"
-                                required
                                 className="w-full pl-12 pr-12 py-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 transition-all font-medium text-gray-900 placeholder:text-gray-400"
                             />
                             <div className="absolute inset-y-0 right-4 flex items-center">
@@ -116,6 +125,16 @@ export default function ResetPassword() {
                                 )}
                             </div>
                         </div>
+
+                        {errors.password && (
+                            <motion.div
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                className="text-red-600 px-2 text-sm rounded-sm font-medium"
+                            >
+                                {errors.password.message}
+                            </motion.div>
+                        )}
                     </div>
 
                     <div className="space-y-2">
@@ -125,10 +144,13 @@ export default function ResetPassword() {
                             <input
                                 type={isShowConfirmPassword ? "text" : "password"}
                                 name="confirmPassword"
-                                value={formData.confirmPassword}
-                                onChange={handleChange}
+                                {...register("confirmPassword", {
+                                    required: "Confirm password is required",
+                                    validate: (value) =>
+                                        value === "password" ||
+                                        "Passwords do not match"
+                                })}
                                 placeholder="••••••••"
-                                required
                                 className="w-full pl-12 pr-12 py-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 transition-all font-medium text-gray-900 placeholder:text-gray-400"
                             />
                             <div className="absolute inset-y-0 right-4 flex items-center">
@@ -139,6 +161,16 @@ export default function ResetPassword() {
                                 )}
                             </div>
                         </div>
+
+                        {errors.confirmPassword && (
+                            <motion.div
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                className="text-red-600 px-2 text-sm rounded-sm font-medium"
+                            >
+                                {errors.confirmPassword.message}
+                            </motion.div>
+                        )}
                     </div>
 
                     <button

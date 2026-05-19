@@ -223,7 +223,7 @@ const AdminProducts = () => {
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 text-right">
-                                            <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <div className="flex items-center justify-end gap-1 md:opacity-0 group-hover:opacity-100 transition-opacity">
                                                 <button
                                                     onClick={() => navigate(`/admin/products/${product.id}`)}
                                                     className="p-2 cursor-pointer text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all"
@@ -279,7 +279,7 @@ const AdminProducts = () => {
 
                 <div className="px-8 py-5 border-t border-gray-50 flex items-center justify-between bg-gray-50/30">
                     <p className="text-xs font-medium text-gray-400 uppercase tracking-widest">
-                        Showing {filteredProducts.length} of {products.length} Products
+                        {filteredProducts.length} of {products.length} Products
                     </p>
                     <div className="flex items-center gap-2">
                         <button className="p-2 rounded-xl border border-gray-200 bg-white text-gray-400 hover:text-black hover:border-black transition-all cursor-not-allowed opacity-50">

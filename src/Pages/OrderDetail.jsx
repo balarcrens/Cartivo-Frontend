@@ -351,8 +351,7 @@ const OrderDetail = () => {
                                 <div className="relative">
                                     <div className="absolute left-[23px] top-0 bottom-0 w-[2px] bg-gray-200" />
 
-                                    <div
-                                        className="absolute left-[23px] top-0 w-[2px] bg-green-600 transition-all duration-700"
+                                    <div className="absolute left-[23px] top-0 w-[2px] bg-green-600 transition-all duration-700"
                                         style={{
                                             height: order.status === 'delivered'
                                                 ? '100%'
@@ -472,8 +471,7 @@ const OrderDetail = () => {
                                 {items.map((item, idx) => (
                                     <div key={idx} className="sm:p-8 p-4 flex gap-8">
                                         <div className="w-24 h-32 bg-gray-50 rounded-sm overflow-hidden flex-shrink-0">
-                                            <img
-                                                src={item.product_image || 'https://placehold.co/100x130?text=Product'}
+                                            <img src={item.product_image || 'https://placehold.co/100x130?text=Product'}
                                                 alt={item.product_name} loading='lazy'
                                                 className="w-full h-full object-cover"
                                             />
@@ -564,11 +562,11 @@ const OrderDetail = () => {
                     <div className="space-y-8 lg:sticky lg:top-24 self-start">
                         <ReturnFacility order={order} token={token} />
 
-                        <div className="sm:p-8 p-4 border border-dashed border-gray-200 rounded-sm flex flex-col items-center text-center">
+                        <div className="sm:p-8 py-6 p-4 border border-dashed border-gray-200 rounded-sm flex flex-col items-center text-center">
                             <AlertCircle className="w-6 h-6 text-gray-300 mb-4" />
                             <h3 className="text-sm font-bold uppercase tracking-widest text-gray-900 mb-2">Need Assistance?</h3>
                             <p className="text-[12px] text-gray-400 font-light mb-6">If you have any questions regarding your order, our concierge is here to help.</p>
-                            <button className="text-[12px] cursor-pointer font-bold uppercase tracking-widest border-b border-gray-900 pb-0.5 hover:text-gray-400 hover:border-gray-400 transition-all">
+                            <button onClick={() => navigate('/contact-us')} className="text-[12px] cursor-pointer font-bold uppercase tracking-widest border-b border-gray-900 pb-0.5 hover:text-gray-400 hover:border-gray-400 transition-all">
                                 Contact Support
                             </button>
                         </div>

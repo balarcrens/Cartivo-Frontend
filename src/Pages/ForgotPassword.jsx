@@ -5,26 +5,37 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { Mail, Loader2, ArrowRight, ArrowLeft } from "lucide-react";
 import toast from 'react-hot-toast';
+import { useForm } from "react-hook-form";
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
 export default function ForgotPassword() {
-    const [email, setEmail] = useState("");
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm();
     const [loading, setLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const onSubmit = async (data) => {
         setLoading(true);
 
         try {
-            const res = await axios.post(`${BASE_URL}/api/v1/auth/forgot-password`, { email });
+            const res = await axios.post(
+                `${BASE_URL}/api/v1/auth/forgot-password`,
+                data
+            );
+
             if (res.data.status === 'success') {
-                toast.success('Reset link sent to your email');
                 setSubmitted(true);
+                toast.success('Reset link sent to your email');
             }
         } catch (err) {
-            toast.error(err.response?.data?.message || "Failed to send reset link");
+            toast.error(
+                err.response?.data?.message ||
+                "Failed to send reset link"
+            );
         } finally {
             setLoading(false);
         }
@@ -56,20 +67,33 @@ export default function ForgotPassword() {
                 </div>
 
                 {!submitted ? (
-                    <form className="space-y-6" onSubmit={handleSubmit}>
+                    <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                         <div className="space-y-2">
                             <label className="text-sm font-semibold text-gray-700 ml-1">Email Address</label>
                             <div className="relative group">
                                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition-colors" />
                                 <input
                                     type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    {...register("email", {
+                                        required: "Email is required",
+                                        pattern: {
+                                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                            message: "Please enter a valid email"
+                                        }
+                                    })}
                                     placeholder="name@example.com"
-                                    required
                                     className="w-full pl-12 pr-4 py-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 transition-all font-medium text-gray-900 placeholder:text-gray-400"
                                 />
                             </div>
+                            {errors.email && (
+                                <motion.div
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    className="text-red-600 px-2 text-sm rounded-sm font-medium"
+                                >
+                                    {errors.email.message}
+                                </motion.div>
+                            )}
                         </div>
 
                         <button
@@ -90,7 +114,7 @@ export default function ForgotPassword() {
                 ) : (
                     <button
                         onClick={() => setSubmitted(false)}
-                        className="w-full py-4.5 border-2 border-gray-100 rounded-2xl font-bold text-gray-600 hover:bg-gray-50 transition-all flex justify-center items-center gap-2"
+                        className="w-full cursor-pointer py-4.5 border-2 border-gray-100 rounded-2xl font-bold text-gray-600 hover:bg-gray-50 transition-all flex justify-center items-center gap-2"
                     >
                         Resend Email
                     </button>

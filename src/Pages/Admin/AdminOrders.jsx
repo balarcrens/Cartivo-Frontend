@@ -189,7 +189,7 @@ const AdminOrders = () => {
 
                 <div className="px-8 py-5 border-t border-gray-50 flex items-center justify-between bg-gray-50/30">
                     <p className="text-xs font-medium text-gray-400 uppercase tracking-widest">
-                        Showing {filteredOrders.length} of {orders.length} orders
+                        {filteredOrders.length} of {orders.length} orders
                     </p>
                     <div className="flex items-center gap-2">
                         <button className="p-2 rounded-xl border border-gray-200 bg-white text-gray-400 hover:text-black hover:border-black transition-all cursor-not-allowed opacity-50">

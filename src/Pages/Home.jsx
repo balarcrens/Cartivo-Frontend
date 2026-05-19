@@ -67,7 +67,7 @@ export default function Home() {
 
     return (
         <main className="bg-white pb-16 overflow-x-hidden font-outfit">
-            <div className="mx-auto max-w-7xl px-4 lg:px-12 py-12">
+            <div className="mx-auto max-w-[90rem] px-4 lg:px-12 py-12">
                 <div className="grid grid-cols-1 gap-3 sm:gap-6">
                     <div className={`${homeData.heroBanners.length > 0 ? 'lg:col-span-8' : 'lg:col-span-12'} overflow-hidden relative group`}>
                         {homeData.heroBanners.length > 0 ? (
@@ -131,8 +131,8 @@ export default function Home() {
                 </div>
             </div>
 
-            <section className="py-12 border-y border-gray-50 bg-[#fafafa]">
-                <div className="mx-auto px-4 lg:px-12">
+            <section className="py-12 max-w-7xl mx-auto border-y border-gray-50 bg-[#fafafa]">
+                <div className="px-4 lg:px-12">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         <div className="flex flex-col items-center text-center space-y-2">
                             <Truck className="w-6 h-6 text-gray-900 stroke-1" />
@@ -163,13 +163,13 @@ export default function Home() {
                     <div className="mx-auto px-4 lg:px-10">
                         <div className="flex items-center justify-between mb-16 px-4">
                             <h2 className="text-2xl font-semibold text-gray-900 tracking-tight uppercase">Curated Categories</h2>
-                            <Link href="/category/all" className="text-gray-400 hover:text-gray-900 font-medium text-sm uppercase tracking-widest transition-all flex items-center gap-2">
+                            <Link to="/category/all" className="text-gray-400 hover:text-gray-900 font-medium text-sm uppercase tracking-widest transition-all flex items-center gap-2">
                                 Explore All <ArrowRight className="w-4 h-4" />
                             </Link>
                         </div>
 
                         <Swiper
-                            modules={[Navigation]}
+                            modules={[Navigation]}  
                             spaceBetween={24}
                             slidesPerView={2}
                             navigation={{ nextEl: '.cat-next', prevEl: '.cat-prev' }}
@@ -332,8 +332,8 @@ export default function Home() {
                                     className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-[3000ms]" loading='lazy'
                                 />
                             </div>
-                            <div className="absolute -bottom-8 sm:-left-8 bg-white text-black p-8 block">
-                                <p className="text-2xl font-serif italic mb-2">"Quality is not an act, it is a habit."</p>
+                            <div className="absolute -bottom-8 sm:-left-8 bg-white text-black p-4 sm:p-8 block">
+                                <p className="text-xl sm:text-2xl font-serif italic mb-2">"Quality is not an act, it is a habit."</p>
                                 <span className="text-[12px] font-bold uppercase tracking-widest text-gray-400">— Aristotle</span>
                             </div>
                         </div>

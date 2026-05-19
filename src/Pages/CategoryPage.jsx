@@ -24,8 +24,8 @@ const CategoryPage = () => {
     const params = new URLSearchParams(location.search);
     const brand = params.get("brand");
 
-
     // Filters State
+    const [showSortMenu, setShowSortMenu] = useState(false);
     const [priceRange, setPriceRange] = useState([0, 200000]);
     const [selectedBrands, setSelectedBrands] = useState([]);
     const [sort, setSort] = useState('newest');
@@ -203,8 +203,8 @@ const CategoryPage = () => {
 
                     <main className="flex-grow">
                         <div className="flex flex-col mb-12 pt-2 sticky top-16 z-40 bg-white">
-                            <div className="flex items-center justify-between pb-2 sm:pb-6 border-b border-gray-50">
-                                <div className="flex items-center gap-2 sm:gap-8">
+                            <div className="flex items-center gap-2 justify-between pb-2 sm:pb-6 border-b border-gray-50">
+                                <div className="flex flex-wrap items-center gap-2 sm:gap-8">
                                     <button
                                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                                         className={`flex items-center cursor-pointer gap-2 text-[10px] font-bold uppercase tracking-widest transition-all lg:hidden ${isSidebarOpen ? 'text-indigo-600' : 'hover:text-gray-500'}`}
@@ -218,15 +218,24 @@ const CategoryPage = () => {
                                 </div>
 
                                 <div className="flex items-center gap-2 sm:gap-6">
-                                    <div className="relative group">
-                                        <button className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest">
-                                            Sort By: {sort.replace('-', ' ')} <ChevronDown className="w-3 h-3" />
+                                    <div className="relative">
+                                        <button onClick={() => setShowSortMenu(!showSortMenu)}
+                                            className="flex items-center cursor-pointer gap-2 text-[11px] font-bold uppercase tracking-widest"
+                                        >
+                                            Sort By: {sort.replace('-', ' ')}
+                                            <ChevronDown className={`w-3 h-3 transition-transform ${showSortMenu ? 'rotate-180' : ''}`} />
                                         </button>
-                                        <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-100 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-30">
+
+                                        <div className={`absolute right-0 top-full mt-2 w-48 bg-white border border-gray-100 shadow-xl z-30 transition-all duration-200 ${showSortMenu
+                                            ? 'opacity-100 visible translate-y-0'
+                                            : 'opacity-0 invisible -translate-y-2'
+                                            }`} >
                                             {['newest', 'low to high', 'high to low', 'popular'].map((s) => (
-                                                <button
-                                                    key={s}
-                                                    onClick={() => handleSortChange(s)}
+                                                <button key={s}
+                                                    onClick={() => {
+                                                        handleSortChange(s);
+                                                        setShowSortMenu(false);
+                                                    }}
                                                     className="w-full text-left cursor-pointer px-6 py-3 text-[11px] font-bold uppercase tracking-widest hover:bg-gray-100 transition-colors"
                                                 >
                                                     {s.replace('-', ' ')}
@@ -236,24 +245,22 @@ const CategoryPage = () => {
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="lg:hidden">
-                                <FilterSidebar
-                                    categories={categories}
-                                    activeCategory={slug}
-                                    onCategoryChange={(newSlug) => navigate(`/category/${newSlug}`)}
-                                    brands={brands}
-                                    selectedBrands={selectedBrands}
-                                    onBrandToggle={handleBrandToggle}
-                                    priceRange={priceRange}
-                                    onPriceChange={handlePriceChange}
-                                    onClearAll={handleClearAll}
-                                    isOpen={isSidebarOpen}
-                                    onClose={() => setIsSidebarOpen(false)}
-                                    isMobile={true}
-                                />
-                            </div>
                         </div>
+
+                        <FilterSidebar
+                            categories={categories}
+                            activeCategory={slug}
+                            onCategoryChange={(newSlug) => navigate(`/category/${newSlug}`)}
+                            brands={brands}
+                            selectedBrands={selectedBrands}
+                            onBrandToggle={handleBrandToggle}
+                            priceRange={priceRange}
+                            onPriceChange={handlePriceChange}
+                            onClearAll={handleClearAll}
+                            isOpen={isSidebarOpen}
+                            onClose={() => setIsSidebarOpen(false)}
+                            isMobile={true}
+                        />
 
                         {loading ? (
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8">

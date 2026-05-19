@@ -203,7 +203,7 @@ const AdminCoupons = () => {
                                             </div>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <div className="flex flex-col gap-1">
+                                            <div className="flex text-nowrap flex-col gap-1">
                                                 <span className="text-sm font-black text-gray-800">
                                                     {coupon.discount_type === 'percentage' ? `${coupon.value}% OFF` : `₹${parseFloat(coupon.value).toLocaleString()} OFF`}
                                                 </span>
@@ -242,7 +242,7 @@ const AdminCoupons = () => {
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 text-right">
-                                            <div className="flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">
+                                            <div className="flex items-center justify-end gap-3 md:opacity-0 group-hover:opacity-100 transition-all duration-300 transform">
                                                 <button
                                                     onClick={() => {
                                                         window.scroll(0, 0);
@@ -289,9 +289,9 @@ const AdminCoupons = () => {
                     </table>
                 </div>
 
-                <div className="px-10 py-8 border-t border-gray-50 flex items-center justify-between bg-gray-50/30">
+                <div className="px-8 py-5 border-t border-gray-50 flex items-center justify-between bg-gray-50/30">
                     <p className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em]">
-                        Sync Complete — {filteredCoupons.length} Vouchers Optimized
+                        {filteredCoupons.length} Vouchers
                     </p>
                     <div className="flex items-center gap-4">
                         <button className="p-3 rounded-2xl border border-gray-200 bg-white text-gray-400 hover:text-black hover:border-black transition-all cursor-not-allowed opacity-50">

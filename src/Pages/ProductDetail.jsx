@@ -545,8 +545,7 @@ const ProductDetail = () => {
                                 </div>
                                 <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
                                     {activeCoupons.map((coupon) => (
-                                        <div
-                                            key={coupon.id}
+                                        <div key={coupon.id}
                                             className="flex-shrink-0 w-52 p-4 border border-gray-100 bg-white hover:border-gray-500 rounded-lg transition-all cursor-default group relative overflow-hidden"
                                         >
                                             <div className="absolute -right-2 -top-2 opacity-5 group-hover:opacity-10 transition-opacity">
@@ -601,7 +600,7 @@ const ProductDetail = () => {
                                     onClick={() => toggleWishlist(product.id)}
                                     className={`p-4 border cursor-pointer transition-all active:scale-[0.98] ${isWishlisted
                                         ? 'bg-rose-500 border-rose-500 text-white hover:bg-rose-600'
-                                        : 'border-gray-100 text-gray-900 hover:border-gray-300 hover:text-rose-500'
+                                        : 'border-gray-100 text-gray-900 hover:border-rose-300 hover:text-rose-500'
                                         }`}
                                 >
                                     <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />

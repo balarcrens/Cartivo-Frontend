@@ -203,7 +203,7 @@ const AdminBrands = () => {
                                             </p>
                                         </td>
                                         <td className="px-8 py-5 text-right">
-                                            <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <div className="flex items-center justify-end gap-2 md:opacity-0 group-hover:opacity-100 transition-opacity">
                                                 <button
                                                     onClick={() => {
                                                         window.scroll(0, 0);
@@ -252,7 +252,7 @@ const AdminBrands = () => {
 
                 <div className="px-8 py-5 border-t border-gray-50 flex items-center justify-between bg-gray-50/30">
                     <p className="text-[12px] font-black text-gray-400 uppercase tracking-[0.2em]">
-                        Showing {filteredBrands.length} of {brands.length} Global Partners
+                        {filteredBrands.length} of {brands.length} Brands
                     </p>
                     <div className="flex items-center gap-3">
                         <button className="p-2.5 rounded-2xl border border-gray-200 bg-white text-gray-400 hover:text-black hover:border-black transition-all cursor-not-allowed opacity-50">

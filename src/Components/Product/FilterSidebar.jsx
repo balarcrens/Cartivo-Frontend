@@ -20,8 +20,8 @@ const FilterSidebar = ({
     isMobile = false
 }) => {
     const sidebarContent = (
-        <div className={`flex flex-col min-h-full ${isMobile ? 'bg-white rounded-t-3xl overflow-hidden' : 'bg-white'}`}>
-            <div className="flex-grow overflow-y-auto p-2 sm:p-4 space-y-6">
+        <div className={`flex flex-col h-full ${isMobile ? 'bg-white rounded-b-3xl overflow-hidden' : 'bg-white'}`}>
+            <div className="flex-grow overflow-y-auto p-2 px-4 sm:p-4 space-y-6">
                 {isMobile && (
                     <div className="flex items-center justify-between p-3 border-b border-gray-100 mb-8">
                         <div className="flex items-center gap-3">
@@ -30,7 +30,7 @@ const FilterSidebar = ({
                             </div>
                             <h2 className="text-lg font-black uppercase tracking-widest text-gray-900">Filters</h2>
                         </div>
-                        <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                        <button onClick={onClose} className="p-2 hover:bg-gray-100 cursor-pointer rounded-full transition-colors">
                             <X className="w-6 h-6 text-gray-400" />
                         </button>
                     </div>
@@ -188,11 +188,12 @@ const FilterSidebar = ({
                             className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100]"
                         />
                         <motion.div
-                            initial={{ y: '100%' }}
+                            initial={{ y: '100vh' }}
                             animate={{ y: 0 }}
-                            exit={{ y: '100%' }}
+                            exit={{ y: '100vh' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            className="fixed inset-x-0 bottom-0 h-[90vh] z-[110] shadow-2xl"
+                            className="fixed top-0 right-0 w-screen h-[90dvh] z-[9999] shadow-2xl"
+                            style={{ position: 'fixed' }}
                         >
                             {sidebarContent}
                         </motion.div>

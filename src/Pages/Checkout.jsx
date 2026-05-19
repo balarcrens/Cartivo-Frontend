@@ -232,18 +232,42 @@ export default function Checkout() {
     const discountAmount = calculateDiscount();
     const finalPrice = checkoutSubtotal - discountAmount + shippingCharge;
 
+    const loadRazorpay = () => {
+        return new Promise((resolve) => {
+            // Already loaded
+            if (window.Razorpay) {
+                resolve(true);
+                return;
+            }
+
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.async = true;
+
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+
+            document.body.appendChild(script);
+        });
+    };
+
     const handlePlaceOrder = async () => {
-        if (!selectedAddress) {
-            toast.error('Please select a boutique address');
-            return;
-        }
-        if (checkoutItems.length === 0) {
-            toast.error('Your selection is empty');
-            return;
-        }
+        if (orderLoading) return;
 
         setOrderLoading(true);
+
         try {
+            if (paymentMethod === 'Online Payment') {
+
+                const loaded = await loadRazorpay();
+
+                if (!loaded) {
+                    toast.error("Razorpay SDK failed to load");
+                    setOrderLoading(false);
+                    return;
+                }
+            }
+
             const payload = {
                 shipping_address: selectedAddress,
                 items: checkoutItems.map(item => ({
@@ -703,18 +727,15 @@ export default function Checkout() {
                                 </div>
 
                                 <button
-                                    onClick={() => {
-                                        if (orderLoading) return;
-                                        handlePlaceOrder();
-                                    }}
-                                    disabled={orderLoading || !selectedAddress || checkoutItems.length === 0}
+                                    disabled={orderLoading}
+                                    onClick={handlePlaceOrder}
                                     className="w-full cursor-pointer bg-gray-900 text-white py-5 text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-black transition-all disabled:bg-gray-200 disabled:cursor-not-allowed flex items-center justify-center gap-3 active:scale-[0.98] shadow-xl shadow-gray-200/50 group"
                                 >
                                     {orderLoading ? (
                                         <Loader2 className="w-5 h-5 animate-spin" />
                                     ) : (
                                         <>
-                                            Confirm & Place Order <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                            {orderLoading ? 'Processing...' : 'Confirm & Place Order'} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                         </>
                                     )}
                                 </button>

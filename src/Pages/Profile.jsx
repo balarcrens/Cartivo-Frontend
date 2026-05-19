@@ -47,7 +47,7 @@ const Profile = () => {
         setIsAddrLoading(true);
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`${BASE_URL}/api/v1/addresses'`, {
+            const response = await fetch(`${BASE_URL}/api/v1/addresses`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await response.json();
@@ -310,8 +310,8 @@ const Profile = () => {
                                                     name="name"
                                                     value={formData.name}
                                                     onChange={handleProfileChange}
-                                                    className="w-full bg-gray-50 border border-transparent px-10 py-3.5 text-sm font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
-                                                    placeholder="John Doe"
+                                                    className="w-full bg-gray-50 border border-gray-200 px-10 py-3.5 text-sm font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
+                                                    placeholder="Full Name"
                                                     required
                                                 />
                                             </div>
@@ -328,7 +328,7 @@ const Profile = () => {
                                                     name="phone"
                                                     value={formData.phone}
                                                     onChange={handleProfileChange}
-                                                    className="w-full bg-gray-50 border border-transparent px-10 py-3.5 text-sm font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
+                                                    className="w-full bg-gray-50 border border-gray-200 px-10 py-3.5 text-sm font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
                                                     placeholder="+91 98765 43210"
                                                 />
                                             </div>
@@ -344,7 +344,7 @@ const Profile = () => {
                                                     type="email"
                                                     value={user?.email || ''}
                                                     disabled
-                                                    className="w-full bg-gray-100 border border-transparent px-10 py-3.5 text-sm font-medium cursor-not-allowed"
+                                                    className="w-full bg-gray-100 border border-gray-200 px-10 py-3.5 text-sm font-medium cursor-not-allowed"
                                                 />
                                             </div>
                                             <p className="text-[12px] text-gray-400 italic mt-1 ml-1">Email cannot be changed for security reasons.</p>
@@ -369,7 +369,7 @@ const Profile = () => {
                             </div>
                         ) : (
                             <div className="space-y-6">
-                                <div className="bg-white border border-gray-100 p-6 sm:p-8">
+                                <div className="bg-white border border-gray-100 p-4 sm:p-8">
                                     <div className="flex items-center justify-between mb-4 border-b border-gray-50 pb-4">
                                         <h3 className="text-lg font-semibold text-gray-900 uppercase tracking-widest text-[12px]">Saved Addresses</h3>
                                         {!showAddrForm && (
@@ -392,7 +392,7 @@ const Profile = () => {
                                                         name="full_name"
                                                         value={addrFormData.full_name}
                                                         onChange={handleAddrChange}
-                                                        className="w-full bg-gray-50 border border-transparent px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
+                                                        className="w-full bg-gray-50 border border-gray-200 px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
                                                         required
                                                     />
                                                 </div>
@@ -403,7 +403,7 @@ const Profile = () => {
                                                         name="phone"
                                                         value={addrFormData.phone}
                                                         onChange={handleAddrChange}
-                                                        className="w-full bg-gray-50 border border-transparent px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
+                                                        className="w-full bg-gray-50 border border-gray-200 px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
                                                         required
                                                     />
                                                 </div>
@@ -414,7 +414,7 @@ const Profile = () => {
                                                         name="address_line1"
                                                         value={addrFormData.address_line1}
                                                         onChange={handleAddrChange}
-                                                        className="w-full bg-gray-50 border border-transparent px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
+                                                        className="w-full bg-gray-50 border border-gray-200 px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
                                                         required
                                                     />
                                                 </div>
@@ -425,7 +425,7 @@ const Profile = () => {
                                                         name="address_line2"
                                                         value={addrFormData.address_line2}
                                                         onChange={handleAddrChange}
-                                                        className="w-full bg-gray-50 border border-transparent px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
+                                                        className="w-full bg-gray-50 border border-gray-200 px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
@@ -435,7 +435,7 @@ const Profile = () => {
                                                         name="city"
                                                         value={addrFormData.city}
                                                         onChange={handleAddrChange}
-                                                        className="w-full bg-gray-50 border border-transparent px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
+                                                        className="w-full bg-gray-50 border border-gray-200 px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
                                                         required
                                                     />
                                                 </div>
@@ -446,7 +446,7 @@ const Profile = () => {
                                                         name="state"
                                                         value={addrFormData.state}
                                                         onChange={handleAddrChange}
-                                                        className="w-full bg-gray-50 border border-transparent px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
+                                                        className="w-full bg-gray-50 border border-gray-200 px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
                                                         required
                                                     />
                                                 </div>
@@ -457,7 +457,7 @@ const Profile = () => {
                                                         name="pincode"
                                                         value={addrFormData.pincode}
                                                         onChange={handleAddrChange}
-                                                        className="w-full bg-gray-50 border border-transparent px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
+                                                        className="w-full bg-gray-50 border border-gray-200 px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
                                                         required
                                                     />
                                                 </div>
@@ -468,7 +468,7 @@ const Profile = () => {
                                                         name="country"
                                                         value={addrFormData.country}
                                                         onChange={handleAddrChange}
-                                                        className="w-full bg-gray-50 border border-transparent px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
+                                                        className="w-full bg-gray-50 border border-gray-200 px-4 py-3 text-md font-medium focus:outline-none focus:bg-white focus:border-gray-900 transition-all"
                                                         required
                                                     />
                                                 </div>
@@ -511,7 +511,7 @@ const Profile = () => {
                                                 </div>
                                             ) : addresses.length > 0 ? (
                                                 addresses.map((addr) => (
-                                                    <div key={addr.id} className={`p-6 border ${addr.is_default ? 'border-indigo-100 bg-indigo-50/20' : 'border-gray-100'} hover:shadow-sm transition-all relative group`}>
+                                                    <div key={addr.id} className={`p-4 sm:p-6 border ${addr.is_default ? 'border-indigo-100 bg-indigo-50/20' : 'border-gray-100'} hover:shadow-sm transition-all relative group`}>
                                                         {addr.is_default && (
                                                             <div className="absolute top-4 right-4 flex items-center gap-1.5 text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full">
                                                                 <CheckCircle2 size={12} />
@@ -529,7 +529,7 @@ const Profile = () => {
                                                         </p>
                                                         <p className="text-sm text-gray-500 mt-2 font-medium">Phone: {addr.phone}</p>
 
-                                                        <div className="mt-6 flex items-center gap-6 pt-4 border-t border-gray-50 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                        <div className="mt-6 flex items-center gap-6 pt-4 border-t border-gray-50 md:opacity-0 group-hover:opacity-100 transition-opacity">
                                                             <button onClick={() => handleEditClick(addr)} className="text-gray-500 hover:text-indigo-600 cursor-pointer text-[12px] font-bold uppercase tracking-widest flex items-center gap-1.5">
                                                                 <Edit3 size={14} /> Edit
                                                             </button>

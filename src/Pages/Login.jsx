@@ -6,29 +6,33 @@ import { motion } from "framer-motion";
 import AuthContext from "../Context/Auth/authContext";
 import { Mail, Lock, Loader2, ArrowRight, Eye, EyeClosed } from "lucide-react";
 import toast from 'react-hot-toast';
+import { useForm } from "react-hook-form";
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
 export default function Login() {
     const navigate = useNavigate();
     const { login, clearSignupData } = useContext(AuthContext);
-    const [formData, setFormData] = useState({ email: "", password: "" });
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors }
+    } = useForm({
+        defaultValues: {
+            email: "",
+            password: ""
+        }
+    });
     const [loading, setLoading] = useState(false);
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [isShowIcon, setIsShowIcon] = useState(false);
-    const [error, setError] = useState("");
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError("");
+    const onSubmit = async (data) => {
         setLoading(true);
 
         try {
-            const res = await axios.post(`${BASE_URL}/api/v1/auth/login`, formData);
+            const res = await axios.post(`${BASE_URL}/api/v1/auth/login`, data);
 
             if (res.data.token) {
                 login(res.data.data.user, res.data.token);
@@ -38,7 +42,6 @@ export default function Login() {
             }
         } catch (err) {
             toast.error("Login Failed");
-            setError(err.response?.data?.error || "Invalid email or password");
         } finally {
             setLoading(false);
         }
@@ -87,7 +90,7 @@ export default function Login() {
                         <p className="text-gray-500 font-light">Enter your credentials to access your account</p>
                     </div>
 
-                    <form className="space-y-6" onSubmit={handleSubmit}>
+                    <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                         <div className="space-y-2">
                             <label className="text-sm font-semibold text-gray-700 ml-1">Email Address</label>
                             <div className="relative group">
@@ -95,13 +98,27 @@ export default function Login() {
                                 <input
                                     type="email"
                                     name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
+                                    {...register("email", {
+                                        required: "Email is required",
+                                        pattern: {
+                                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                            message: "Please enter a valid email"
+                                        }
+                                    })}
                                     placeholder="name@example.com"
-                                    required
                                     className="w-full pl-12 pr-4 py-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 transition-all font-medium text-gray-900 placeholder:text-gray-400"
                                 />
                             </div>
+
+                            {errors.email && (
+                                <motion.div
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    className="text-red-600 px-2 text-sm rounded-sm font-medium"
+                                >
+                                    {errors.email.message}
+                                </motion.div>
+                            )}
                         </div>
 
                         <div className="space-y-2">
@@ -114,10 +131,20 @@ export default function Login() {
                                 <input
                                     type={isShowPassword ? "text" : "password"}
                                     name="password"
-                                    value={formData.password}
-                                    onChange={handleChange}
+                                    {...register("password", {
+                                        required: "Password is required",
+                                        minLength: {
+                                            value: 8,
+                                            message: "Password must be at least 8 characters"
+                                        },
+                                        pattern: {
+                                            value:
+                                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$/,
+                                            message:
+                                                "Password must contain uppercase, lowercase, number and special character"
+                                        }
+                                    })}
                                     placeholder="••••••••"
-                                    required
                                     onInput={() => { setIsShowIcon(true) }}
                                     className="w-full pl-12 pr-12 py-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 transition-all font-medium text-gray-900 placeholder:text-gray-400"
                                 />
@@ -131,30 +158,17 @@ export default function Login() {
                                     </div>
                                 )}
                             </div>
-                        </div>
 
-                        <div className="flex items-center justify-between px-1">
-                            <label className="flex items-center gap-2 cursor-pointer group">
-                                <div className="relative flex items-center justify-center">
-                                    <input type="checkbox" className="peer sr-only" />
-                                    <div className="w-5 h-5 border-2 border-gray-200 rounded-md bg-white peer-checked:bg-indigo-600 peer-checked:border-indigo-600 transition-all" />
-                                    <svg className="absolute w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3.5">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <span className="text-sm font-semibold text-gray-600 group-hover:text-gray-900 transition-colors">Remember me</span>
-                            </label>
+                            {errors.password && (
+                                <motion.div
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    className="text-red-600 px-2 text-sm rounded-sm font-medium"
+                                >
+                                    {errors.password.message}
+                                </motion.div>
+                            )}
                         </div>
-
-                        {error && (
-                            <motion.div
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                className="bg-red-50 text-red-600 text-sm py-3 px-4 rounded-xl border border-red-100 font-medium"
-                            >
-                                {error}
-                            </motion.div>
-                        )}
 
                         <button
                             type="submit"
@@ -173,7 +187,7 @@ export default function Login() {
 
                         <div className="relative my-8">
                             <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-gray-100"></div>
+                                <div className="w-full border-t border-gray-200"></div>
                             </div>
                             <div className="relative flex justify-center text-xs uppercase">
                                 <span className="bg-white px-4 text-gray-400 tracking-wider">Or continue with</span>

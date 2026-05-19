@@ -6,21 +6,28 @@ import { motion } from "framer-motion";
 import AuthContext from "../Context/Auth/authContext";
 import { MapPin, ArrowLeft, Loader2, CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
 export default function AddressForm() {
     const navigate = useNavigate();
     const { signupData, clearSignupData, login } = useContext(AuthContext);
-    const [address, setAddress] = useState({
-        street: "",
-        city: "",
-        state: "",
-        country: "",
-        postalCode: "",
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset
+    } = useForm({
+        defaultValues: {
+            street: "",
+            city: "",
+            state: "",
+            country: "",
+            postalCode: "",
+        }
     });
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
 
     useEffect(() => {
         if (!signupData) {
@@ -28,27 +35,19 @@ export default function AddressForm() {
         }
     }, [signupData, navigate]);
 
-    const handleChange = (e) => {
-        setAddress({ ...address, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError("");
+    const onSubmit = async (data) => {
         setLoading(true);
         try {
-            const payload = { ...signupData, address };
+            const payload = { ...signupData, data };
             const res = await axios.post(`${BASE_URL}/api/v1/auth/signup`, payload);
             if (res.data.success || res.data.token) {
                 await login(res.data.data.user, res.data.token);
-                clearSignupData();
                 toast.success('Registered Successfully');
             }
             navigate('/');
+            clearSignupData();
         } catch (error) {
-            console.error(error);
             toast.error("Registration failed");
-            setError(error.response?.data?.error || "Registration failed. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -111,75 +110,131 @@ export default function AddressForm() {
                         </p>
                     </div>
 
-                    <form className="space-y-4" onSubmit={handleSubmit}>
+                    <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                         <div className="grid grid-cols-2 gap-4">
                             <div className="col-span-2 space-y-2">
-                                <label className="text-sm font-semibold text-gray-700 ml-1">Street Address</label>
+                                <label className="text-sm font-semibold text-gray-700 ml-1">Street Address
+                                    <span className="text-red-500"> *</span>
+                                </label>
                                 <div className="relative group">
                                     <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition-colors" />
                                     <input
                                         name="street"
                                         placeholder="123 ABC Street"
-                                        value={address.street}
-                                        onChange={handleChange}
-                                        required
+                                        {...register("street", {
+                                            required: "Street is required",
+                                        })}
                                         className="w-full pl-12 pr-4 py-3.5 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 transition-all font-medium text-gray-900 placeholder:text-gray-400"
                                     />
                                 </div>
+
+                                {errors.street && (
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        className="text-red-600 px-2 text-sm rounded-sm font-medium"
+                                    >
+                                        {errors.street.message}
+                                    </motion.div>
+                                )}
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-sm font-semibold text-gray-700 ml-1">City</label>
+                                <label className="text-sm font-semibold text-gray-700 ml-1">City
+                                    <span className="text-red-500"> *</span>
+                                </label>
                                 <input
                                     name="city"
                                     placeholder="City"
-                                    value={address.city}
-                                    onChange={handleChange}
-                                    required
+                                    {...register("city", {
+                                        required: "City is required",
+                                    })}
                                     className="w-full px-4 py-3.5 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 transition-all font-medium text-gray-900 placeholder:text-gray-400"
                                 />
+
+                                {errors.city && (
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        className="text-red-600 px-2 text-sm rounded-sm font-medium"
+                                    >
+                                        {errors.city.message}
+                                    </motion.div>
+                                )}
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-sm font-semibold text-gray-700 ml-1">State</label>
+                                <label className="text-sm font-semibold text-gray-700 ml-1">State
+                                    <span className="text-red-500"> *</span>
+                                </label>
                                 <input
                                     name="state"
                                     placeholder="State"
-                                    value={address.state}
-                                    onChange={handleChange}
-                                    required
+                                    {...register("state", {
+                                        required: "State is required",
+                                    })}
                                     className="w-full px-4 py-3.5 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 transition-all font-medium text-gray-900 placeholder:text-gray-400"
                                 />
+
+                                {errors.state && (
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        className="text-red-600 px-2 text-sm rounded-sm font-medium"
+                                    >
+                                        {errors.state.message}
+                                    </motion.div>
+                                )}
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-sm font-semibold text-gray-700 ml-1">Country</label>
+                                <label className="text-sm font-semibold text-gray-700 ml-1">Country
+                                    <span className="text-red-500"> *</span>
+                                </label>
                                 <input
                                     name="country"
                                     placeholder="Country"
-                                    value={address.country}
-                                    onChange={handleChange}
-                                    required
+                                    {...register("country", {
+                                        required: "Country is required",
+                                    })}
                                     className="w-full px-4 py-3.5 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 transition-all font-medium text-gray-900 placeholder:text-gray-400"
                                 />
+
+                                {errors.country && (
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        className="text-red-600 px-2 text-sm rounded-sm font-medium"
+                                    >
+                                        {errors.country.message}
+                                    </motion.div>
+                                )}
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-sm font-semibold text-gray-700 ml-1">Postal Code</label>
+                                <label className="text-sm font-semibold text-gray-700 ml-1">Postal Code
+                                    <span className="text-red-500"> *</span>
+                                </label>
                                 <input
                                     name="postalCode"
                                     placeholder="395006"
-                                    value={address.postalCode}
-                                    onChange={handleChange}
-                                    required
+                                    {...register("postalCode", {
+                                        required: "PostalCode is required",
+                                    })}
                                     className="w-full px-4 py-3.5 bg-gray-50/50 border border-gray-200 rounded-2xl focus:outline-none focus:border-indigo-500 transition-all font-medium text-gray-900 placeholder:text-gray-400"
                                 />
+
+                                {errors.postalCode && (
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        className="text-red-600 px-2 text-sm rounded-sm font-medium"
+                                    >
+                                        {errors.postalCode.message}
+                                    </motion.div>
+                                )}
                             </div>
                         </div>
-
-                        {error && (
-                            <p className="text-red-500 text-xs font-medium px-1 italic">{error}</p>
-                        )}
 
                         <button
                             type="submit"
