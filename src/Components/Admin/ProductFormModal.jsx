@@ -655,7 +655,7 @@ const ProductFormModal = ({ isOpen, onClose, product, onSave }) => {
                                         <button
                                             type="button"
                                             onClick={() => handleRemoveVariant(vIdx)}
-                                            className="text-gray-300 hover:text-rose-500 p-2 hover:bg-rose-50 rounded-xl transition-all"
+                                            className="text-gray-300 cursor-pointer hover:text-rose-500 p-2 hover:bg-rose-50 rounded-xl transition-all"
                                         >
                                             <Trash2 size={20} />
                                         </button>
@@ -916,7 +916,7 @@ const ProductFormModal = ({ isOpen, onClose, product, onSave }) => {
                                                                     const newImages = variant.images.filter((_, i) => i !== iIdx);
                                                                     handleVariantChange(vIdx, 'images', newImages);
                                                                 }}
-                                                                className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-rose-500 transition-all flex items-center justify-center"
+                                                                className="w-8 h-8 cursor-pointer rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-rose-500 transition-all flex items-center justify-center"
                                                             >
                                                                 <Trash2 size={14} />
                                                             </button>

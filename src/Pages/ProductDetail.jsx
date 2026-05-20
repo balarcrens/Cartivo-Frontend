@@ -383,7 +383,10 @@ const ProductDetail = () => {
         );
     }
 
-    const productImages = product.images || [product.image];
+    const productImages = [
+        ...(activeVariant?.images || []),
+        ...(product.images || [product.image]),
+    ];
 
     return (
         <div className="min-h-screen bg-white">
@@ -405,7 +408,7 @@ const ProductDetail = () => {
                                 <button
                                     key={idx}
                                     onClick={() => setSelectedImage(idx)}
-                                    className={`relative flex flex-shrink-0 items-center justify-center w-27 h-28 px-2 sm:w-28 sm:h-32 lg:w-full lg:h-32 border transition-all duration-300 ${selectedImage === idx ? 'border-gray-200' : 'border-gray-100 hover:border-gray-300'}`}
+                                    className={`relative cursor-pointer flex flex-shrink-0 items-center justify-center w-27 h-28 px-2 sm:w-28 sm:h-32 lg:w-full lg:h-32 border transition-all duration-300 ${selectedImage === idx ? 'border-gray-200' : 'border-gray-100 hover:border-gray-300'}`}
                                 >
                                     <img src={img} alt={`${product.name} thumbnail ${idx}`} loading='lazy' className="h-full object-contain" />
                                 </button>

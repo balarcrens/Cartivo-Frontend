@@ -143,6 +143,31 @@ const AdminProductDetail = () => {
         }
     };
 
+    const handleDeleteVariants = async (id) => {
+        const result = await Swal.fire({
+            title: 'Are you sure want to delete this variant?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+        });
+
+        if (result.isConfirmed) {
+            try {
+                await axios.delete(`${BASE_URL}/api/v1/variants/${id}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                fetchProductDetail();
+                toast.success('Variant deleted successfullly');
+            } catch (error) {
+                console.error(error);
+                toast.error('Error deleting Variant:', error);
+            }
+        }
+    }
+
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[600px] space-y-4">
@@ -175,7 +200,7 @@ const AdminProductDetail = () => {
                 <div className="flex items-center gap-6">
                     <button
                         onClick={() => navigate('/admin/products')}
-                        className="p-3 bg-white border border-gray-100 rounded-2xl text-gray-500 hover:text-black hover:shadow-xl hover:shadow-gray-100 transition-all active:scale-95"
+                        className="p-3 bg-white cursor-pointer border border-gray-100 rounded-2xl text-gray-500 hover:text-black hover:shadow-xl hover:shadow-gray-100 transition-all active:scale-95"
                     >
                         <ArrowLeft size={18} />
                     </button>
@@ -328,7 +353,14 @@ const AdminProductDetail = () => {
                                     <div className="p-3 bg-gray-50 rounded-2xl group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
                                         <Package size={20} />
                                     </div>
-                                    <span className="text-[10px] font-black text-gray-300 uppercase tracking-widest">SKU: {variant.sku || variant.id.split('-')[0]}</span>
+                                    <button type="button"
+                                        onClick={() => {
+                                            handleDeleteVariants(variant.id);
+                                        }}
+                                        className="text-gray-300 cursor-pointer hover:text-rose-500 p-2 hover:bg-rose-50 rounded-xl transition-all"
+                                    >
+                                        <Trash2 size={20} />
+                                    </button>
                                 </div>
                                 <h4 className="text-lg font-bold text-gray-900 mb-1">{variant.name}</h4>
                                 <p className="text-xs font-medium text-gray-400 mb-4 line-clamp-2">{variant.description || 'Verified product variant with premium specifications.'}</p>

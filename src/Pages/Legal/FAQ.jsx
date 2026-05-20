@@ -50,7 +50,7 @@ export default function FAQ() {
                 },
                 {
                     q: "Are the products authentic?",
-                    a: "Authenticity is our foundation. Every item on Cartivo is sourced directly FROM public.brands or authorized distributors and is verified by our experts."
+                    a: "Authenticity is our foundation. Every item on Cartivo is sourced directly FROM brands or authorized distributors and is verified by our experts."
                 },
                 {
                     q: "Does my product come with a warranty?",

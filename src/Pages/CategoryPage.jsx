@@ -202,8 +202,8 @@ const CategoryPage = () => {
                     </aside>
 
                     <main className="flex-grow">
-                        <div className="flex flex-col mb-12 pt-2 sticky top-16 z-40 bg-white">
-                            <div className="flex items-center gap-2 justify-between pb-2 sm:pb-6 border-b border-gray-50">
+                        <div className="flex flex-col mb-6 pt-2 sticky top-16 z-40 bg-white">
+                            <div className="flex items-center gap-2 px-2 justify-between pb-2 border-b border-gray-50">
                                 <div className="flex flex-wrap items-center gap-2 sm:gap-8">
                                     <button
                                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -212,7 +212,7 @@ const CategoryPage = () => {
                                         <Filter className={`w-4 h-4 ${isSidebarOpen ? 'fill-indigo-50' : ''}`} />
                                         {isSidebarOpen ? 'Hide Filters' : 'Show Filters'}
                                     </button>
-                                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                    <span className="text-[10px] lg:px-0 px-4 hidden lg:block font-bold uppercase tracking-widest text-gray-400">
                                         {products.length} Items found
                                     </span>
                                 </div>
@@ -245,6 +245,9 @@ const CategoryPage = () => {
                                     </div>
                                 </div>
                             </div>
+                            <span className="text-[10px] px-4 lg:hidden block font-bold uppercase tracking-widest text-gray-400">
+                                {products.length} Items found
+                            </span>
                         </div>
 
                         <FilterSidebar

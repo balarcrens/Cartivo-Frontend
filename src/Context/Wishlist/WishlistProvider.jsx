@@ -75,7 +75,7 @@ export default function WishlistProvider({ children }) {
             }
         } catch (error) {
             console.error(error);
-            console.error('Error removing FROM public.wishlist:', error);
+            console.error('Error removing FROM wishlist:', error);
         }
     };
 
