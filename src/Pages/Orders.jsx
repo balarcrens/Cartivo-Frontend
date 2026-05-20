@@ -144,9 +144,11 @@ const Orders = () => {
                                                 {order.item_details?.[0]?.name}
                                                 {order.item_details?.length > 1 && ` & ${order.item_details.length - 1} other items`}
                                             </h3>
-                                            <p className="text-gray-400 text-xs font-light">
-                                                Delivering to {order.shipping_address.city}
-                                            </p>
+                                            {order.shipping_address?.city &&
+                                                <p className="text-gray-400 text-xs font-light">
+                                                    Delivering to {order?.shipping_address?.city}
+                                                </p>
+                                            }
                                         </div>
 
                                         <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-900 group-hover:translate-x-2 transition-transform">

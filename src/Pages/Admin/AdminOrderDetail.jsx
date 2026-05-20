@@ -98,7 +98,7 @@ const AdminOrderDetail = () => {
     if (!orderData) return <div className="p-8 text-center bg-white rounded-3xl premium-border">Order not found</div>;
 
     const { order, items, history } = orderData;
-    const address = typeof order.shipping_address === 'string' ? JSON.parse(order.shipping_address) : order.shipping_address;
+    const address = typeof order?.shipping_address === 'string' ? JSON.parse(order?.shipping_address) : order?.shipping_address;
 
     return (
         <div className="pb-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -182,7 +182,7 @@ const AdminOrderDetail = () => {
 
                     <div className="bg-white premium-border shadow-xl shadow-gray-200/50 overflow-hidden">
                         <div className="p-6 sm:p-8 border-b border-gray-50">
-                            <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-900">Order Items ({items.length})</h2>
+                            <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-900">Order Items ({items?.length})</h2>
                         </div>
                         <div className="divide-y divide-gray-50">
                             {items.map((item, idx) => (
@@ -196,14 +196,14 @@ const AdminOrderDetail = () => {
                                     </div>
                                     <div className="flex-grow py-2">
                                         <div className="flex justify-between items-start mb-2">
-                                            <h3 className="text-base font-semibold text-gray-900 line-clamp-1">{item.product_name}</h3>
+                                            <h3 className="text-base font-semibold text-gray-900 line-clamp-1">{item?.product_name}</h3>
                                             <span className="text-base font-bold text-gray-900 tracking-tight">₹{parseFloat(item.price).toLocaleString()}</span>
                                         </div>
                                         <div className="space-y-1 mb-4">
                                             {item.variant_name && (
-                                                <p className="text-[11px] uppercase tracking-widest text-gray-400 font-medium">{item.variant_name}</p>
+                                                <p className="text-[11px] uppercase tracking-widest text-gray-400 font-medium">{item?.variant_name}</p>
                                             )}
-                                            <p className="text-[11px] uppercase tracking-widest text-gray-400 font-medium">Quantity: {item.quantity}</p>
+                                            <p className="text-[11px] uppercase tracking-widest text-gray-400 font-medium">Quantity: {item?.quantity}</p>
                                         </div>
                                         <div className="flex items-center gap-2">
                                             <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">SKU:</span>
@@ -249,7 +249,7 @@ const AdminOrderDetail = () => {
                                     <div key={idx} className="relative pl-10">
                                         <div className={`absolute left-0 top-1.5 w-4 h-4 rounded-full border-4 border-white shadow-sm ring-1 ring-gray-100 ${idx === 0 ? 'bg-green-600' : 'bg-gray-200'}`} />
                                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-1">
-                                            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-900">{h.status}</span>
+                                            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-900">{h?.status}</span>
                                             <span className="text-sm text-gray-400">{new Date(h.created_at).toLocaleString()}</span>
                                         </div>
                                         <p className="text-sm text-gray-500 font-light leading-relaxed">{h.comment || 'No comment provided'}</p>
@@ -273,7 +273,7 @@ const AdminOrderDetail = () => {
                                     {userData?.name?.charAt(0) || order.user_name?.charAt(0) || 'U'}
                                 </div>
                                 <div>
-                                    <h3 className="text-lg font-bold text-gray-900 leading-none mb-1">{userData?.name || order.user_name}</h3>
+                                    <h3 className="text-lg font-bold text-gray-900 leading-none mb-1">{userData?.name || order?.user_name}</h3>
                                 </div>
                             </div>
                             <div className="space-y-4 pt-4">
@@ -283,7 +283,7 @@ const AdminOrderDetail = () => {
                                 </div>
                                 <div className="flex items-center gap-3 text-sm text-gray-600">
                                     <Phone className="w-4 h-4 text-gray-300" />
-                                    <span>{userData?.phone || address.phone}</span>
+                                    <span>{userData?.phone || address?.phone}</span>
                                 </div>
                             </div>
                         </div>
@@ -296,12 +296,12 @@ const AdminOrderDetail = () => {
                             </h2>
                         </div>
                         <div className="p-8 space-y-4">
-                            <p className="text-sm font-bold text-gray-900">{address.full_name}</p>
+                            <p className="text-sm font-bold text-gray-900">{address?.full_name}</p>
                             <div className="text-sm font-light text-gray-500 leading-relaxed space-y-1">
-                                <p>{address.address_line1}</p>
-                                {address.address_line2 && <p>{address.address_line2}</p>}
-                                <p>{address.city}, {address.state} - {address.pincode}</p>
-                                <p className="font-bold text-gray-900">{address.country}</p>
+                                <p>{address?.address_line1}</p>
+                                {address?.address_line2 && <p>{address?.address_line2}</p>}
+                                <p>{address?.city}, {address?.state} - {address?.pincode}</p>
+                                <p className="font-bold text-gray-900">{address?.country}</p>
                             </div>
                             <div className="pt-4 flex items-center gap-2">
                                 <span className="px-3 py-1 bg-gray-100 rounded-md text-xs font-bold text-gray-500 uppercase tracking-widest">Home Delivery</span>
@@ -318,12 +318,12 @@ const AdminOrderDetail = () => {
                         <div className="p-8 space-y-6">
                             <div className="flex items-center justify-between">
                                 <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400">Method</span>
-                                <span className="text-sm font-bold text-gray-900 uppercase tracking-widest">{order.payment_method}</span>
+                                <span className="text-sm font-bold text-gray-900 uppercase tracking-widest">{order?.payment_method}</span>
                             </div>
                             <div className="flex items-center justify-between">
                                 <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400">Status</span>
-                                <span className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-lg border ${order.payment_status === 'paid' ? 'text-emerald-600 border-emerald-100' : 'text-amber-600 border-amber-100'}`}>
-                                    {order.payment_status}
+                                <span className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-lg border ${order?.payment_status === 'paid' ? 'text-emerald-600 border-emerald-100' : 'text-amber-600 border-amber-100'}`}>
+                                    {order?.payment_status}
                                 </span>
                             </div>
                             <div className="pt-4 border-t border-gray-50">

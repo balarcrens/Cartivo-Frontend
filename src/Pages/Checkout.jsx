@@ -52,6 +52,8 @@ export default function Checkout() {
     const [activeCoupons, setActiveCoupons] = useState([]);
     const [paymentMethod, setPaymentMethod] = useState('Cash on Delivery');
 
+    const [showSuggestion, setShowSuggestion] = useState(false);
+
     const [addressForm, setAddressForm] = useState({
         full_name: '',
         phone: '',
@@ -253,6 +255,18 @@ export default function Checkout() {
 
     const handlePlaceOrder = async () => {
         if (orderLoading) return;
+
+        if (addresses.length === 0) {
+            setShowSuggestion(true);
+            window.scroll(0, 0);
+            toast.error("Please add shipping address first");
+
+            setTimeout(() => {
+                setShowSuggestion(false);
+            }, 4000);
+
+            return;
+        }
 
         setOrderLoading(true);
 
@@ -465,12 +479,36 @@ export default function Checkout() {
                                         <div className="w-1.5 h-1.5 rounded-full bg-amber-500" />
                                         <h2 className="text-[11px] font-bold uppercase tracking-[0.3em] text-gray-900">Select Address</h2>
                                     </div>
-                                    <button
-                                        onClick={openAddAddress}
-                                        className="text-xs font-bold cursor-pointer uppercase tracking-widest text-amber-600 hover:text-amber-700 transition-colors flex items-center gap-2"
-                                    >
-                                        <Plus className="w-3.5 h-3.5" /> Add New Boutique Address
-                                    </button>
+                                    <div className="relative">
+                                        <button
+                                            onClick={openAddAddress}
+                                            className={`text-xs font-bold cursor-pointer uppercase tracking-widest transition-all flex items-center gap-2 ${showSuggestion
+                                                ? 'text-rose-600 animate-pulse'
+                                                : 'text-amber-600 hover:text-amber-700'
+                                                }`}
+                                        >
+                                            <Plus className="w-3.5 h-3.5" />
+                                            Add New Boutique Address
+                                        </button>
+
+                                        <AnimatePresence>
+                                            {showSuggestion && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                                    transition={{ duration: 0.2 }}
+                                                    className="absolute top-full mt-3 right-0 z-50"
+                                                >
+                                                    <div className="bg-gray-900 text-white text-[11px] uppercase tracking-wider px-4 py-3 rounded-lg shadow-2xl whitespace-nowrap border border-gray-700">
+                                                        Please add shipping address first
+                                                    </div>
+
+                                                    <div className="absolute -top-1 right-6 w-3 h-3 bg-gray-900 rotate-45 border-l border-t border-gray-700" />
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -585,7 +623,7 @@ export default function Checkout() {
                                 {checkoutItems.length === 0 && (
                                     <div className="text-center py-10">
                                         <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Your selection is empty</p>
-                                        <Link to="/" className="mt-4 inline-block text-[10px] font-bold text-gray-900 border-b border-gray-900 pb-1 uppercase tracking-widest">Return to Boutique</Link>
+                                        <Link to="/" className="mt-4 inline-block text-[12px] font-bold text-gray-900 border-b border-gray-900 pb-1 uppercase tracking-widest">Return to Boutique</Link>
                                     </div>
                                 )}
                             </div>
@@ -889,6 +927,6 @@ export default function Checkout() {
                     </div>
                 )}
             </AnimatePresence>
-        </main>
+        </main >
     );
 }

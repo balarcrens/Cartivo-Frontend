@@ -279,7 +279,7 @@ const OrderDetail = () => {
     if (!orderData) return <div>Order not found</div>;
 
     const { order, items, history } = orderData;
-    const address = typeof order.shipping_address === 'string' ? JSON.parse(order.shipping_address) : order.shipping_address;
+    const address = typeof order?.shipping_address === 'string' ? JSON.parse(order?.shipping_address) : order?.shipping_address;
 
     const steps = [
         { status: 'pending', label: 'Order Placed', icon: <Clock className="w-5 h-5" />, date: order.created_at },
@@ -465,7 +465,7 @@ const OrderDetail = () => {
 
                         <div className="bg-white border border-gray-100 overflow-hidden rounded-sm">
                             <div className="sm:p-8 p-4 border-b border-gray-50">
-                                <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-900">Order Items ({items.length})</h2>
+                                <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-900">Order Items ({items?.length})</h2>
                             </div>
                             <div className="divide-y divide-gray-50">
                                 {items.map((item, idx) => (
@@ -479,15 +479,15 @@ const OrderDetail = () => {
                                         <div className="flex-grow">
                                             <div className="flex justify-between items-start mb-2">
                                                 <h3 className="text-sm line-clamp-2 font-medium text-gray-900 hover:text-indigo-600 transition-colors">
-                                                    <Link to={`/product/${item.slug}`}>{item.product_name}</Link>
+                                                    <Link to={`/product/${item.slug}`}>{item?.product_name}</Link>
                                                 </h3>
                                                 <span className="text-sm font-bold text-gray-900">₹{parseFloat(item.price).toLocaleString()}</span>
                                             </div>
                                             <div className="space-y-1 mb-3">
                                                 {item.variant_name && (
-                                                    <p className="text-[12px] uppercase tracking-widest text-gray-400">{item.variant_name}</p>
+                                                    <p className="text-[12px] uppercase tracking-widest text-gray-400">{item?.variant_name}</p>
                                                 )}
-                                                <p className="text-[12px] uppercase tracking-widest text-gray-400">Quantity: {item.quantity}</p>
+                                                <p className="text-[12px] uppercase tracking-widest text-gray-400">Quantity: {item?.quantity}</p>
                                             </div>
                                             <button onClick={() => navigate(`/product/${item.slug}#reviews`)} className="text-[11px] cursor-pointer font-bold uppercase tracking-widest text-indigo-600 border-b border-indigo-600 pb-0.5 hover:text-indigo-800 hover:border-indigo-800 transition-all">
                                                 Write a Review
@@ -531,15 +531,15 @@ const OrderDetail = () => {
                                 <MapPin className="w-4 h-4" /> Shipping Details
                             </h2>
                             <div className="space-y-2">
-                                <p className="text-sm font-bold text-gray-900">{address.full_name}</p>
-                                <p className="text-sm font-light text-gray-500 leading-relaxed">
-                                    {address.address_line1},<br />
-                                    {address.address_line2 && <>{address.address_line2},<br /></>}
-                                    {address.city}, {address.state} - {address.pincode}<br />
-                                    {address.country}
-                                </p>
+                                <p className="text-sm font-bold text-gray-900">{address?.full_name}</p>
+                                {address && <p className="text-sm font-light text-gray-500 leading-relaxed">
+                                    {address?.address_line1},<br />
+                                    {address?.address_line2 && <>{address?.address_line2},<br /></>}
+                                    {address?.city}, {address?.state} - {address?.pincode}<br />
+                                    {address?.country}
+                                </p>}
                                 <p className="text-sm font-light text-gray-500 mt-4 flex items-center gap-2">
-                                    <span className="font-bold text-xs uppercase tracking-widest text-gray-300">Phone:</span> {address.phone}
+                                    <span className="font-bold text-xs uppercase tracking-widest text-gray-300">Phone:</span> {address?.phone}
                                 </p>
                             </div>
                         </div>
@@ -550,10 +550,10 @@ const OrderDetail = () => {
                             </h2>
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-3">
-                                    <span className="text-sm font-medium text-gray-900 uppercase tracking-widest">{order.payment_method}</span>
+                                    <span className="text-sm font-medium text-gray-900 uppercase tracking-widest">{order?.payment_method}</span>
                                 </div>
-                                <span className={`text-[11px] font-bold uppercase tracking-widest px-2 py-1 rounded-sm ${order.payment_status === 'paid' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'}`}>
-                                    {order.payment_status}
+                                <span className={`text-[11px] font-bold uppercase tracking-widest px-2 py-1 rounded-sm ${order?.payment_status === 'paid' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'}`}>
+                                    {order?.payment_status}
                                 </span>
                             </div>
                         </div>

@@ -1,9 +1,8 @@
 import React from 'react';
 
 const InvoiceTemplate = ({ order, items }) => {
-    const address = typeof order.shipping_address === 'string' ? JSON.parse(order.shipping_address) : order.shipping_address;
+    const address = typeof order?.shipping_address === 'string' ? JSON.parse(order?.shipping_address) : order?.shipping_address;
 
-    // Formatting constants
     const colors = {
         primary: '#1A1A1A',
         secondary: '#4B5563',
@@ -13,8 +12,8 @@ const InvoiceTemplate = ({ order, items }) => {
     };
 
     const logoUrl = window.location.origin + '/logo_v2.png';
-    const invoiceNo = order.id.split('-')[0].toUpperCase();
-    const formattedDate = new Date(order.created_at).toLocaleDateString('en-GB', {
+    const invoiceNo = order?.id.split('-')[0].toUpperCase();
+    const formattedDate = new Date(order?.created_at).toLocaleDateString('en-GB', {
         day: 'numeric',
         month: 'long',
         year: 'numeric'
@@ -77,12 +76,12 @@ const InvoiceTemplate = ({ order, items }) => {
                         <div style={{ fontSize: '13px', fontWeight: '600', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                             Billed to:
                         </div>
-                        <div style={{ fontSize: '14px', fontWeight: '500', marginBottom: '2px' }}>{address.full_name}</div>
+                        <div style={{ fontSize: '14px', fontWeight: '500', marginBottom: '2px' }}>{address?.full_name}</div>
                         <div style={{ fontSize: '13px', color: colors.secondary, lineHeight: '1.6' }}>
-                            {address.address_line1}<br />
-                            {address.address_line2 && <>{address.address_line2}<br /></>}
-                            {address.city}, {address.state} - {address.pincode}<br />
-                            {address.phone}
+                            {address?.address_line1}<br />
+                            {address?.address_line2 && <>{address?.address_line2}<br /></>}
+                            {address?.city}, {address?.state} - {address?.pincode}<br />
+                            {address?.phone}
                         </div>
                     </div>
                     <div style={{ flex: '1' }}>

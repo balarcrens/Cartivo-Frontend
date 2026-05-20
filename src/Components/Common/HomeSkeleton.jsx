@@ -23,7 +23,7 @@ const HeroSkeleton = () => (
 
 const FeaturesSkeleton = () => (
     <section className="py-12 border-y border-gray-50 bg-[#fafafa]">
-        <div className="mx-auto px-4 lg:px-12">
+        <div className="mx-auto max-w-7xl px-4 lg:px-12">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                 {[1, 2, 3, 4].map((i) => (
                     <div key={i} className="flex flex-col items-center text-center space-y-3">

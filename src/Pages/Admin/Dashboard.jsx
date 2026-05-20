@@ -49,13 +49,8 @@ const Dashboard = () => {
 
     if (loading) {
         return (
-            <div className="space-y-6 md:space-y-10">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                    {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="h-32 md:h-40 bg-white rounded-3xl animate-pulse premium-border"></div>
-                    ))}
-                </div>
-                <div className="bg-white h-[300px] md:h-[400px] rounded-3xl animate-pulse premium-border"></div>
+            <div className="flex items-center justify-center min-h-[400px]">
+                <div className="luxury-spinner"></div>
             </div>
         );
     }
