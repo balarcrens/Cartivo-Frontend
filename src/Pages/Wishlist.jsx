@@ -59,10 +59,11 @@ const Wishlist = () => {
                                         price: item.price,
                                         images: item.images,
                                         slug: item.slug,
-                                        category_name: item.category_name
+                                        category_name: item.category_name,
+                                        ratings: item.ratings
                                     }}
                                 />
-                                <div className="mt-4 flex gap-2">
+                                <div className="flex gap-2">
                                     <button
                                         onClick={() => addToCart(item.product_id, null, 1)}
                                         className="flex-grow cursor-pointer bg-white border border-gray-900 text-gray-900 py-3 text-[11px] font-bold uppercase tracking-widest hover:bg-gray-900 hover:text-white transition-all flex items-center justify-center gap-2 active:scale-95"

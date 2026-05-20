@@ -1,11 +1,20 @@
-import React, { useContext } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, Star } from 'lucide-react';
 import WishlistContext from '../../Context/Wishlist/WishlistContext';
+import axios from 'axios';
+
+const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
 const ProductCard = ({ product }) => {
     const { toggleWishlist, isInWishlist } = useContext(WishlistContext);
     const isWishlisted = isInWishlist(product.id);
+
+    const ratings = Array.isArray(product.ratings) ? product.ratings : [];
+    const averageRating = ratings.length > 0
+        ? (ratings.reduce((acc, curr) => acc + Number(curr || 0), 0) / ratings.length).toFixed(1)
+        : '0.0';
 
     return (
         <div className="group/card cursor-pointer flex flex-col h-full bg-white transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-transparent hover:border-gray-100">
@@ -56,7 +65,7 @@ const ProductCard = ({ product }) => {
                     <span className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em] block mb-1">
                         {product.category_name || "New Collection"}
                     </span>
-                    <h3 className="text-[11px] sm:text-sm font-semibold text-gray-900 line-clamp-2 uppercase group-hover/card:text-gray-500 transition-colors">
+                    <h3 className="text-[11px] sm:text-sm font-semibold text-gray-900 line-clamp-1 uppercase group-hover/card:text-gray-500 transition-colors">
                         {product.name || product.title}
                     </h3>
                 </div>
@@ -70,8 +79,7 @@ const ProductCard = ({ product }) => {
                     </div>
                     <div className="flex items-center gap-1.5 bg-gray-50 px-2.5 py-1 rounded-sm">
                         <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
-                        {/* <span className="text-gray-900 text-[10px] font-bold">{averageRating}</span> */}
-                        <span className="text-gray-900 text-[10px] font-bold">0</span>
+                        <span className="text-gray-900 text-[10px] font-bold">{averageRating}</span>
                     </div>
                 </div>
             </Link>

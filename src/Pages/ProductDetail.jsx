@@ -449,12 +449,12 @@ const ProductDetail = () => {
                         <div className="mb-8">
                             <div className="flex items-center justify-between mb-2">
                                 <span className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.3em]">
-                                    {product.brand_name || 'Cartivo Signature'}
+                                    {product.brand_name || 'Cartivo'}
                                 </span>
                                 <div className="flex items-center gap-1.5">
                                     <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                                    <span className="text-gray-900 text-[11px] font-bold">{averageRating}</span>
-                                    <span className="text-gray-400 text-[11px]">({reviews.length} Reviews)</span>
+                                    <span className="text-gray-900 text-[12px] font-bold">{averageRating}</span>
+                                    <span className="text-gray-400 text-[12px]">({reviews.length} Reviews)</span>
                                 </div>
                             </div>
                             <h1 className="text-2xl sm:text-3xl font-light text-gray-900 uppercase tracking-wider leading-tight mb-4">
@@ -925,10 +925,10 @@ const ProductDetail = () => {
                                     </div>
                                 )}
 
-                                <div className="space-y-12">
+                                <div className="space-y-6">
                                     {reviews.length > 0 ? (
                                         reviews.map((r) => (
-                                            <div key={r.id} className="border-t border-gray-50 pt-12 animate-in">
+                                            <div key={r.id} className="border-t border-gray-50 pt-6 animate-in">
                                                 <div className="flex flex-col md:flex-row md:items-start gap-3">
                                                     <div className="md:w-1/4">
                                                         <div className="flex items-center gap-2 mb-4">
