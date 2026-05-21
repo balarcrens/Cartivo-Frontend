@@ -117,7 +117,7 @@ export default function FAQ() {
                 ))}
             </div>
 
-            <div className="mt-16 p-8 bg-gray-900 rounded-3xl text-center">
+            <div className="mt-16 py-6 px-4 sm:p-8 bg-gray-900 rounded-3xl text-center">
                 <HelpCircle className="w-10 h-10 text-amber-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2 font-outfit">Still have questions?</h3>
                 <p className="text-gray-400 mb-6 font-inter">Our concierge team is available 24/7 to assist with your inquiries.</p>

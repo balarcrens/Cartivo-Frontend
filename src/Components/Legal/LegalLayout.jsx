@@ -7,7 +7,7 @@ export default function LegalLayout({ title, lastUpdated, children }) {
 
     return (
         <div className="min-h-screen bg-white">
-            <SEO 
+            <SEO
                 title={`${title} | Cartivo`}
                 description={`Official Cartivo ${title}. Last updated: ${lastUpdated}. Review our terms and policies.`}
                 keywords={`${title.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '')}, cartivo policy, legal documents, ecommerce terms, cartivo`}
@@ -31,7 +31,7 @@ export default function LegalLayout({ title, lastUpdated, children }) {
             </div>
 
             <div className="container mx-auto px-4 py-16 max-w-4xl">
-                <div className="bg-white rounded-3xl p-4 sm:p-8 md:p-12 classic-shadow premium-border animate-in">
+                <div className="bg-white rounded-3xl p-2 sm:p-8 md:p-12 animate-in">
                     <div className="prose prose-indigo max-w-none prose-headings:font-outfit prose-p:text-gray-600 prose-p:leading-relaxed prose-li:text-gray-600">
                         {children}
                     </div>

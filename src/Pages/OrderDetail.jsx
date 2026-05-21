@@ -8,7 +8,8 @@ import InvoiceTemplate from '../Components/Invoice/InvoiceTemplate';
 import {
     ChevronLeft, Package, Truck, CheckCircle2, Clock,
     MapPin, CreditCard, ShoppingBag, Calendar, AlertCircle, RotateCcw, Camera, X, Upload,
-    Clock1
+    Clock1,
+    RotateCw
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import SEO from '../Components/Common/SEO';
@@ -283,17 +284,46 @@ const OrderDetail = () => {
     const address = typeof order?.shipping_address === 'string' ? JSON.parse(order?.shipping_address) : order?.shipping_address;
 
     const steps = [
-        { status: 'pending', label: 'Order Placed', icon: <Clock className="w-5 h-5" />, date: order.created_at },
-        { status: 'processing', label: 'Processing', icon: <Package className="w-5 h-5" />, date: history.find(h => h.status === 'processing')?.created_at },
-        { status: 'shipped', label: 'In Transit', icon: <Truck className="w-5 h-5" />, date: history.find(h => h.status === 'shipped')?.created_at },
-        { status: 'delivered', label: 'Delivered', icon: <CheckCircle2 className="w-5 h-5" />, date: history.find(h => h.status === 'delivered')?.created_at },
+        {
+            status: 'pending',
+            label: 'Order Placed',
+            icon: <Clock className="w-5 h-5" />,
+            date: order.created_at
+        },
+        {
+            status: 'processing',
+            label: 'Processing',
+            icon: <Package className="w-5 h-5" />,
+            date: history.find(h => h.status === 'processing')?.created_at
+        },
+        {
+            status: 'shipped',
+            label: 'In Transit',
+            icon: <Truck className="w-5 h-5" />,
+            date: history.find(h => h.status === 'shipped')?.created_at
+        },
+        {
+            status: 'delivered',
+            label: 'Delivered',
+            icon: <CheckCircle2 className="w-5 h-5" />,
+            date: history.find(h => h.status === 'delivered')?.created_at
+        },
+        // Only show returned step if order is returned
+        ...(order.status === 'returned'
+            ? [{
+                status: 'returned',
+                label: 'Returned',
+                icon: <RotateCw className="w-5 h-5" />,
+                date: history.find(h => h.status === 'returned')?.created_at
+            }]
+            : [])
     ];
 
     const currentStatusIndex = steps.findIndex(s => s.status === order.status);
 
     return (
         <div className="min-h-screen bg-[#fafafa] pb-24">
-            <SEO 
+            <SEO
                 title={`Order Details #${order.id.split('-')[0].toUpperCase()} | Cartivo`}
                 description={`Track and review the status, items, delivery details, and invoices for your Cartivo order.`}
                 keywords="order details, invoice, order tracking, shipment tracking, cartivo"
@@ -337,16 +367,19 @@ const OrderDetail = () => {
 
                                         <p className="text-sm text-gray-500 mt-1">
                                             {order.status === 'delivered'
-                                                ? 'Your package has been delivered successfully.'
-                                                : 'Your order is on the way.'}
+                                                ? 'Your package has been delivered successfully.' : order.status === 'returned' ?
+                                                    'Order has been returned successfully.'
+                                                    : 'Your order is on the way.'}
                                         </p>
                                     </div>
 
                                     <div className={`px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider ${order.status === 'delivered'
                                         ? 'text-green-700 border border-green-200'
-                                        : order.status === 'shipped'
-                                            ? 'text-blue-700 border border-blue-200'
-                                            : 'text-amber-700 border border-amber-200'
+                                        : order.status === 'returned'
+                                            ? 'text-rose-700 border border-rose-200'
+                                            : order.status === 'shipped'
+                                                ? 'text-blue-700 border border-blue-200'
+                                                : 'text-amber-700 border border-amber-200'
                                         }`}>
                                         {order.status}
                                     </div>
@@ -370,7 +403,9 @@ const OrderDetail = () => {
 
                                     <div className="space-y-10">
                                         {steps.map((step, idx) => {
-                                            const isDelivered = order.status === 'delivered';
+                                            const isDelivered =
+                                                order.status === 'delivered' ||
+                                                order.status === 'returned';
                                             const isCompleted = isDelivered
                                                 ? idx <= currentStatusIndex
                                                 : idx < currentStatusIndex;
@@ -421,6 +456,9 @@ const OrderDetail = () => {
 
                                                             {step.status === 'delivered' &&
                                                                 'Package delivered successfully.'}
+
+                                                            {step.status === 'returned' &&
+                                                                'Order has been returned successfully.'}
                                                         </p>
 
                                                         {step.date && (
@@ -447,7 +485,7 @@ const OrderDetail = () => {
                                 </div>
                             </div>
 
-                            {order.status !== 'delivered' && (
+                            {(order.status !== 'delivered' && order.status !== 'returned') && (
                                 <div className="border-t border-gray-100 px-6 py-4 sm:px-8 bg-gray-50">
                                     <div className="flex items-center gap-3">
                                         <Truck className="w-5 h-5 text-green-600" />

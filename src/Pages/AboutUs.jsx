@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Users, Target, ShieldCheck, Zap, Award, Heart } from 'lucide-react';
 import SEO from '../Components/Common/SEO';
 
 export default function AboutUs() {
+    const [loaded, setLoaded] = useState(false);
     return (
         <div className="min-h-screen bg-white">
-            <SEO 
+            <SEO
                 title="About Us | Cartivo"
                 description="Learn about Cartivo's story, core values, and mission to redefine the luxury e-commerce experience."
                 keywords="about us, cartivo story, company mission, brand values, luxury shopping"
             />
             <div className="relative h-[60vh] flex items-center justify-center overflow-hidden">
                 <img
-                    src="/about_us.jpg"
-                    alt="Cartivo Headquarters" loading='lazy'
-                    className="absolute inset-0 w-full h-full object-cover brightness-50"
+                    src="/about_us.webp"
+                    alt="Cartivo Headquarters"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                    onLoad={() => setLoaded(true)}
+                    className={`absolute inset-0 w-full h-full object-cover brightness-50 transition-[filter] duration-700 ${loaded ? 'blur-0' : 'blur-md'}`}
                 />
                 <div className="relative z-10 text-center px-4">
                     <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 font-outfit tracking-tight animate-in">
@@ -111,7 +116,7 @@ export default function AboutUs() {
                                 <div className="absolute inset-0 w-0 bg-[#09AFF4] rounded-r-lg transition-all duration-[1400ms] ease-in-out group-hover:w-full z-0" />
 
                                 <div className='relative z-10 m-0 transition-all'>
-                                    <div className={`w-14 h-14 bg-gray-50 ${value.color.split(' ')[1]} rounded-lg flex items-center justify-center mb-4 transition-transform`}>
+                                    <div className={`w-14 h-14 bg-gray-50/80 ${value.color.split(' ')[1]} rounded-lg flex items-center justify-center mb-4 transition-transform`}>
                                         <value.icon className="w-7 h-7" />
                                     </div>
                                     <h4 className="text-xl font-bold group-hover:text-black mb-4 font-outfit">{value.title}</h4>

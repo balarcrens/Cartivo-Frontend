@@ -75,10 +75,6 @@ export default function Register() {
 
                 <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
                     <div className="mb-8">
-                        <div className="flex gap-2 mb-6">
-                            <div className="h-1.5 w-16 bg-indigo-600 rounded-full shadow-[0_0_12px_rgba(79,70,229,0.4)]" />
-                            <div className="h-1.5 w-16 bg-gray-100 rounded-full" />
-                        </div>
                         <h1 className="text-3xl font-outfit font-bold text-gray-900 mb-2">Create Account</h1>
                         <p className="text-gray-500 font-medium text-sm flex items-center gap-2">
                             <span className="w-5 h-5 rounded-full pt-1 bg-indigo-50 text-indigo-600 flex items-center justify-center text-[10px] font-bold">1</span>

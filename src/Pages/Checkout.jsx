@@ -444,7 +444,7 @@ export default function Checkout() {
 
     return (
         <main className="min-h-screen bg-white pb-20 font-outfit">
-            <SEO 
+            <SEO
                 title="Secure Checkout | Cartivo"
                 description="Securely finalize your order at Cartivo. Complimentary shipping and insured express checkout."
                 keywords="checkout, secure checkout, purchase, cart, order payment, cartivo"
@@ -637,7 +637,7 @@ export default function Checkout() {
                     </div>
 
                     <div className="lg:w-2/5">
-                        <div className="sticky top-32 space-y-5 bg-[#fafafa] sm:p-6 border border-gray-100">
+                        <div className="sticky top-32 space-y-5 sm:bg-[#fafafa] sm:p-6 sm:border border-gray-100">
                             <div>
                                 <h2 className="text-[11px] font-bold uppercase tracking-[0.3em] text-gray-900 mb-8 border-b border-gray-900 pb-2 inline-block">Pricing Details</h2>
 
@@ -762,7 +762,7 @@ export default function Checkout() {
                                     </div>}
                                 </div>
 
-                                <div className="py-10 flex flex-wrap gap-2 justify-between items-baseline">
+                                <div className="py-10 flex gap-2 justify-between items-baseline">
                                     <span className="text-sm font-bold text-gray-900 uppercase tracking-[0.3em]">Estimated Total</span>
                                     <div className="text-right">
                                         <span className="text-3xl font-bold text-gray-900 tracking-tighter block">₹{finalPrice.toLocaleString('en-IN')}</span>

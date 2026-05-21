@@ -157,7 +157,7 @@ export default function Header() {
                                 >
                                     <button
                                         onClick={() => setIsProfileOpen(!isProfileOpen)}
-                                        className="w-10 h-10 cursor-pointer bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center hover:bg-indigo-100 transition-all border-2 border-transparent hover:border-indigo-200 shadow-sm overflow-hidden"
+                                        className="w-10 h-10 ml-1 cursor-pointer bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center hover:bg-indigo-100 transition-all border-2 border-transparent hover:border-indigo-200 shadow-sm overflow-hidden"
                                     >
                                         {user?.profile_image ? (
                                             <img

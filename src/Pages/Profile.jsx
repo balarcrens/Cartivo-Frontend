@@ -210,7 +210,7 @@ const Profile = () => {
 
     return (
         <div className="min-h-screen bg-[#fafafa] py-10 sm:py-16 px-4 sm:px-6 lg:px-8 font-outfit">
-            <SEO 
+            <SEO
                 title="My Profile | Cartivo"
                 description="Manage your account profile details, phone number, and delivery addresses on Cartivo."
                 keywords="my profile, edit profile, saved addresses, user details, cartivo"
@@ -247,7 +247,7 @@ const Profile = () => {
                                     <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-50 mb-4 group-hover:opacity-80 transition-all duration-300">
                                         <img src={formData.profile_image || 'https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png'} alt="User" loading='lazy' className="w-full h-full object-cover" />
                                     </div>
-                                    <div className="absolute bottom-4 right-0 bg-gray-900 text-white p-2 rounded-full border-2 border-white shadow-lg transform group-hover:scale-110 transition-transform">
+                                    <div className="absolute bottom-0 right-0 bg-gray-900 text-white p-2 rounded-full border-2 border-white shadow-lg transform group-hover:scale-110 transition-transform">
                                         <Camera size={14} />
                                     </div>
                                 </label>
