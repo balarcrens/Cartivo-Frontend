@@ -20,6 +20,7 @@ const SearchPage = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     // Filters State
+    const [showSortMenu, setShowSortMenu] = useState(false);
     const [priceRange, setPriceRange] = useState([0, 200000]);
     const [selectedBrands, setSelectedBrands] = useState([]);
     const [sort, setSort] = useState('newest');
@@ -110,7 +111,7 @@ const SearchPage = () => {
 
     return (
         <div className="min-h-screen bg-white">
-            <SEO 
+            <SEO
                 title={seoTitle}
                 description={query ? `Find the best deals on "${query}" and related products at Cartivo. Secure checkout and fast delivery.` : "Search for your favorite products, brands, and categories across the premium collections on Cartivo."}
             />
@@ -170,15 +171,24 @@ const SearchPage = () => {
                                 </div>
 
                                 <div className="flex items-center gap-2 sm:gap-6">
-                                    <div className="relative group">
-                                        <button className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest">
-                                            Sort By: {sort.replace('-', ' ')} <ChevronDown className="w-3 h-3" />
+                                    <div className="relative">
+                                        <button onClick={() => setShowSortMenu(!showSortMenu)}
+                                            className="flex items-center cursor-pointer gap-2 text-[11px] font-bold uppercase tracking-widest"
+                                        >
+                                            Sort By: {sort.replace('-', ' ')}
+                                            <ChevronDown className={`w-3 h-3 transition-transform ${showSortMenu ? 'rotate-180' : ''}`} />
                                         </button>
-                                        <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-100 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-30">
+
+                                        <div className={`absolute right-0 top-full mt-2 w-48 bg-white border border-gray-100 shadow-xl z-30 transition-all duration-200 ${showSortMenu
+                                            ? 'opacity-100 visible translate-y-0'
+                                            : 'opacity-0 invisible -translate-y-2'
+                                            }`} >
                                             {['newest', 'low to high', 'high to low', 'popular'].map((s) => (
-                                                <button
-                                                    key={s}
-                                                    onClick={() => handleSortChange(s)}
+                                                <button key={s}
+                                                    onClick={() => {
+                                                        handleSortChange(s);
+                                                        setShowSortMenu(false);
+                                                    }}
                                                     className="w-full text-left cursor-pointer px-6 py-3 text-[11px] font-bold uppercase tracking-widest hover:bg-gray-100 transition-colors"
                                                 >
                                                     {s.replace('-', ' ')}
