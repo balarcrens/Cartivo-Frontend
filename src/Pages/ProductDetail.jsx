@@ -12,6 +12,7 @@ import ProductCard from '../Components/Product/ProductCard';
 import AuthContext from '../Context/Auth/authContext';
 import WishlistContext from '../Context/Wishlist/WishlistContext';
 import toast from 'react-hot-toast';
+import SEO from '../Components/Common/SEO';
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
@@ -390,6 +391,13 @@ const ProductDetail = () => {
 
     return (
         <div className="min-h-screen bg-white">
+            <SEO 
+                title={`${product.name} | Cartivo`}
+                description={product.description || `Buy ${product.name} at Cartivo with secure checkout and fast delivery.`}
+                keywords={`${product.name}, ${product.brand_name || ''}, ${product.category_name || ''}, cartivo, online shopping`}
+                image={productImages[0] || "/logo.png"}
+                type="product"
+            />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                 <nav className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">
                     <Link to="/" className="hover:text-gray-900 transition-colors">Home</Link>

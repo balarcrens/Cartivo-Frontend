@@ -4,6 +4,7 @@ import { Heart, ShoppingBag, ArrowRight, Trash2, ChevronRight } from 'lucide-rea
 import WishlistContext from '../Context/Wishlist/WishlistContext';
 import CartContext from '../Context/Cart/CartContext';
 import ProductCard from '../Components/Product/ProductCard';
+import SEO from '../Components/Common/SEO';
 
 const Wishlist = () => {
     const { wishlistItems, removeFromWishlist, wishlistCount, loading } = useContext(WishlistContext);
@@ -22,6 +23,11 @@ const Wishlist = () => {
 
     return (
         <div className="min-h-screen bg-white pb-20">
+            <SEO 
+                title="My Wishlist | Cartivo"
+                description="View and manage your curated wishlist of favorite items on Cartivo. Save now, buy later."
+                keywords="wishlist, saved products, favorites, premium boutique, cartivo"
+            />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <nav className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-8">
                     <Link to="/" className="hover:text-gray-900 transition-colors">Home</Link>

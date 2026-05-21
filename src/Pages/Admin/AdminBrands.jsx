@@ -144,7 +144,7 @@ const AdminBrands = () => {
                 <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-all">
                     <p className="text-[12px] font-black uppercase tracking-widest text-gray-400 mb-2">Featured Brands</p>
                     <div className="flex items-end justify-between">
-                        <p className="text-3xl font-black text-amber-600">{brands.length > 5 ? 5 : brands.length}</p>
+                        <p className="text-3xl font-black text-amber-600">{brands.length ? brands.length : 0}</p>
                         <Award size={24} className="text-amber-100" />
                     </div>
                 </div>
@@ -195,11 +195,11 @@ const AdminBrands = () => {
                                             </div>
                                         </td>
                                         <td className="px-8 py-5">
-                                            <code className="text-sm font-bold text-slate-500 bg-slate-50 px-3 py-1 rounded-lg border border-slate-100">{brand.slug}</code>
+                                            <code className="text-sm font-bold text-slate-500 bg-slate-50 px-3 py-1 rounded-lg border border-slate-100">{brand?.slug}</code>
                                         </td>
                                         <td className="px-8 py-5">
                                             <p className="text-sm font-medium text-gray-500 line-clamp-2 max-w-[200px] italic">
-                                                {brand.description || 'No legacy description provided for this brand partner.'}
+                                                {brand?.description || '──'}
                                             </p>
                                         </td>
                                         <td className="px-8 py-5 text-right">

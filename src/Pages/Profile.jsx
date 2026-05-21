@@ -5,6 +5,7 @@ import { User, Phone, Mail, Camera, Save, ShoppingBag, MapPin, Shield, LogOut, P
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import SEO from '../Components/Common/SEO';
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
@@ -209,6 +210,11 @@ const Profile = () => {
 
     return (
         <div className="min-h-screen bg-[#fafafa] py-10 sm:py-16 px-4 sm:px-6 lg:px-8 font-outfit">
+            <SEO 
+                title="My Profile | Cartivo"
+                description="Manage your account profile details, phone number, and delivery addresses on Cartivo."
+                keywords="my profile, edit profile, saved addresses, user details, cartivo"
+            />
             <div className="max-w-6xl mx-auto">
                 <div className="mb-10 animate-in">
                     <h1 className="text-3xl font-semibold text-gray-900 tracking-tight">My Account</h1>

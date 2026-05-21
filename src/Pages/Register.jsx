@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import AuthContext from "../Context/Auth/authContext";
 import { User, Mail, Phone, Lock, ArrowRight, Loader2, EyeClosed, Eye } from "lucide-react";
 import { useForm } from "react-hook-form";
+import SEO from "../Components/Common/SEO";
 
 export default function Register() {
     const { signupData, updateSignupData } = useContext(AuthContext);
@@ -32,6 +33,11 @@ export default function Register() {
 
     return (
         <section className="flex min-h-screen bg-[#fafafa] items-center justify-center p-4 md:p-8 relative overflow-hidden">
+            <SEO 
+                title="Create Account | Cartivo"
+                description="Sign up for a new Cartivo account to shop fashion, track delivery logistics, and secure a premium shopper profile."
+                keywords="create account, sign up, register, customer registration, cartivo"
+            />
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
                 <div className="absolute -top-[10%] -right-[10%] w-[40%] h-[40%] bg-purple-50 rounded-full blur-[120px] opacity-60" />
                 <div className="absolute -bottom-[10%] -left-[10%] w-[40%] h-[40%] bg-indigo-50 rounded-full blur-[120px] opacity-60" />

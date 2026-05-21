@@ -6,6 +6,7 @@ import { Filter, ChevronDown } from 'lucide-react';
 import axios from 'axios';
 import FilterSidebar from '../Components/Product/FilterSidebar';
 import ProductCard from '../Components/Product/ProductCard';
+import SEO from '../Components/Common/SEO';
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
@@ -150,8 +151,15 @@ const CategoryPage = () => {
         setSearchParams({});
     };
 
+    const currentCategoryName = categoryPath.length > 0 ? categoryPath[categoryPath.length - 1].name : (slug === 'all' ? 'All Products' : (slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : 'Collection'));
+
     return (
         <div className="min-h-screen bg-white">
+            <SEO 
+                title={`${currentCategoryName} Collection | Cartivo`}
+                description={`Explore the latest ${currentCategoryName} collections at Cartivo. Premium quality products with fast shipping and secure payments.`}
+                keywords={`${currentCategoryName}, cartivo ${currentCategoryName}, premium fashion, shop ${currentCategoryName}, online shopping, cartivo`}
+            />
             <div className="relative bg-[#f9f9f9] border-b border-gray-100 overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
                     <svg width="100%" height="100%"><defs><pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="currentColor" /></pattern></defs><rect width="100%" height="100%" fill="url(#dots)" /></svg>

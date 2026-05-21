@@ -1,11 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import SEO from '../Common/SEO';
 
 export default function LegalLayout({ title, lastUpdated, children }) {
     const navigate = useNavigate();
 
     return (
         <div className="min-h-screen bg-white">
+            <SEO 
+                title={`${title} | Cartivo`}
+                description={`Official Cartivo ${title}. Last updated: ${lastUpdated}. Review our terms and policies.`}
+                keywords={`${title.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '')}, cartivo policy, legal documents, ecommerce terms, cartivo`}
+            />
             <div className="relative overflow-hidden bg-gray-50 py-20 border-b border-gray-100">
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                     <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>

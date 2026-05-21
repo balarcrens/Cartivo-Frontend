@@ -3,12 +3,18 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Home, ArrowLeft, Search, Compass } from 'lucide-react';
+import SEO from '../Components/Common/SEO';
 
 const NotFound = () => {
     const navigate = useNavigate();
 
     return (
         <div className="relative min-h-screen w-full flex items-center justify-center bg-[#fafafa] overflow-hidden font-outfit">
+            <SEO 
+                title="Page Not Found | Cartivo"
+                description="The page you are looking for has either been moved, deleted, or never existed in our luxury collection."
+                keywords="404, page not found, lost, error page, cartivo"
+            />
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <motion.div
                     initial={{ opacity: 0 }}

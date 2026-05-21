@@ -6,6 +6,7 @@ import { Check, Package, ArrowRight, ShoppingBag, MapPin, CreditCard, ChevronRig
 import axios from 'axios';
 import AuthContext from '../Context/Auth/authContext';
 import confetti from "canvas-confetti";
+import SEO from '../Components/Common/SEO';
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
@@ -126,6 +127,11 @@ export default function OrderSuccess() {
     }
     return (
         <main className="min-h-screen bg-white pb-20 font-outfit">
+            <SEO 
+                title="Order Confirmed | Cartivo"
+                description="Your Cartivo luxury order has been confirmed successfully. Track details, view destination, and review transaction status."
+                keywords="order success, order confirmed, purchase complete, secure checkout, luxury experience, cartivo"
+            />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8">
                 <nav className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">
                     <Link to="/" className="hover:text-gray-900 transition-colors">Home</Link>

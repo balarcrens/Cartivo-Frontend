@@ -11,6 +11,7 @@ import {
     Clock1
 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import SEO from '../Components/Common/SEO';
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
@@ -292,6 +293,11 @@ const OrderDetail = () => {
 
     return (
         <div className="min-h-screen bg-[#fafafa] pb-24">
+            <SEO 
+                title={`Order Details #${order.id.split('-')[0].toUpperCase()} | Cartivo`}
+                description={`Track and review the status, items, delivery details, and invoices for your Cartivo order.`}
+                keywords="order details, invoice, order tracking, shipment tracking, cartivo"
+            />
             <div className="bg-white border-b border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <Link to="/orders" className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.3em] text-gray-400 hover:text-gray-900 transition-colors mb-6 group">

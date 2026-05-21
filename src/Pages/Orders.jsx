@@ -5,6 +5,7 @@ import axios from 'axios';
 import AuthContext from '../Context/Auth/authContext';
 import { Package, ChevronRight, ArrowRight, Clock, CheckCircle2, Truck, XCircle, RotateCw } from 'lucide-react';
 import { motion } from 'framer-motion';
+import SEO from '../Components/Common/SEO';
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
@@ -70,6 +71,11 @@ const Orders = () => {
 
     return (
         <div className="min-h-screen bg-[#fafafa] pb-24">
+            <SEO 
+                title="My Purchase History | Cartivo"
+                description="Track current shipments, manage returns, and view your complete purchase history at Cartivo."
+                keywords="orders, my orders, order history, track shipping, purchase history, cartivo"
+            />
             <div className="bg-white border-b border-gray-100">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-6">
                     <nav className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-6">

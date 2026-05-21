@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock, ShieldCheck, Loader2 } from 'lucide-react';
+import SEO from '../Components/Common/SEO';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -44,6 +45,11 @@ export default function ContactUs() {
 
     return (
         <div className="min-h-screen bg-gray-50">
+            <SEO 
+                title="Contact Us | Cartivo"
+                description="Get in touch with Cartivo's boutique customer support team. Send us a message, email, or chat with us live."
+                keywords="contact us, customer service, support team, live chat, helpline, email support"
+            />
             <div className="bg-white border-b border-gray-100 py-20">
                 <div className="container mx-auto px-4 text-center">
                     <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 font-outfit">

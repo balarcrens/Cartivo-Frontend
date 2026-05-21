@@ -7,6 +7,7 @@ import AuthContext from "../Context/Auth/authContext";
 import { Mail, Lock, Loader2, ArrowRight, Eye, EyeClosed } from "lucide-react";
 import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form";
+import SEO from "../Components/Common/SEO";
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
@@ -49,6 +50,11 @@ export default function Login() {
 
     return (
         <section className="flex min-h-screen bg-[#fafafa] items-center justify-center p-4 md:p-8 relative overflow-hidden">
+            <SEO 
+                title="Sign In | Cartivo"
+                description="Sign in to your Cartivo account to track orders, manage your wishlist, and update delivery profiles."
+                keywords="sign in, login, cartivo account, customer portal, secure login, cartivo"
+            />
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
                 <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-indigo-50 rounded-full blur-[120px] opacity-60" />
                 <div className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-purple-50 rounded-full blur-[120px] opacity-60" />

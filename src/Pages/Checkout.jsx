@@ -29,6 +29,7 @@ import AuthContext from '../Context/Auth/authContext';
 import CartContext from '../Context/Cart/CartContext';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import SEO from '../Components/Common/SEO';
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
@@ -443,6 +444,11 @@ export default function Checkout() {
 
     return (
         <main className="min-h-screen bg-white pb-20 font-outfit">
+            <SEO 
+                title="Secure Checkout | Cartivo"
+                description="Securely finalize your order at Cartivo. Complimentary shipping and insured express checkout."
+                keywords="checkout, secure checkout, purchase, cart, order payment, cartivo"
+            />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-6">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-4">
                     <nav className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.3em] text-gray-400">

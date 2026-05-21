@@ -1,9 +1,15 @@
 import React from 'react';
 import { Users, Target, ShieldCheck, Zap, Award, Heart } from 'lucide-react';
+import SEO from '../Components/Common/SEO';
 
 export default function AboutUs() {
     return (
         <div className="min-h-screen bg-white">
+            <SEO 
+                title="About Us | Cartivo"
+                description="Learn about Cartivo's story, core values, and mission to redefine the luxury e-commerce experience."
+                keywords="about us, cartivo story, company mission, brand values, luxury shopping"
+            />
             <div className="relative h-[60vh] flex items-center justify-center overflow-hidden">
                 <img
                     src="/about_us.jpg"

@@ -6,6 +6,7 @@ import { Filter, ChevronDown, Search } from 'lucide-react';
 import axios from 'axios';
 import FilterSidebar from '../Components/Product/FilterSidebar';
 import ProductCard from '../Components/Product/ProductCard';
+import SEO from '../Components/Common/SEO';
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
@@ -105,8 +106,14 @@ const SearchPage = () => {
         setSearchParams(newParams);
     };
 
+    const seoTitle = query ? `Search Results for "${query}" | Cartivo` : "Search Products | Cartivo";
+
     return (
         <div className="min-h-screen bg-white">
+            <SEO 
+                title={seoTitle}
+                description={query ? `Find the best deals on "${query}" and related products at Cartivo. Secure checkout and fast delivery.` : "Search for your favorite products, brands, and categories across the premium collections on Cartivo."}
+            />
             <div className="relative bg-[#fcfcfc] border-b border-gray-100 overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
                     <svg width="100%" height="100%"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1" /></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" /></svg>

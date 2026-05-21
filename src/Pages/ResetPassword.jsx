@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Lock, Loader2, CheckCircle2, Eye, EyeClosed } from "lucide-react";
 import toast from 'react-hot-toast';
 import { useForm } from "react-hook-form";
+import SEO from "../Components/Common/SEO";
 
 const BASE_URL = import.meta.env.VITE_ENV === 'Development' ? import.meta.env.VITE_BACKEND_DEV_URL : import.meta.env.VITE_BACKEND_URL;
 
@@ -52,6 +53,11 @@ export default function ResetPassword() {
     if (success) {
         return (
             <section className="flex min-h-screen bg-[#fafafa] items-center justify-center p-4 relative overflow-hidden">
+                <SEO 
+                    title="Password Reset Successful | Cartivo"
+                    description="Your password has been successfully reset. You will be redirected to the secure login page."
+                    keywords="password changed, reset success, secure login, cartivo"
+                />
                 <motion.div
                     initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
@@ -77,6 +83,11 @@ export default function ResetPassword() {
 
     return (
         <section className="flex min-h-screen bg-[#fafafa] items-center justify-center p-4 md:p-8 relative overflow-hidden">
+            <SEO 
+                title="Reset Password | Cartivo"
+                description="Choose a secure, complex new password for your Cartivo shopper account."
+                keywords="reset password, secure credentials, update password, cartivo account, security"
+            />
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
                 <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-indigo-50 rounded-full blur-[120px] opacity-60" />
                 <div className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-purple-50 rounded-full blur-[120px] opacity-60" />

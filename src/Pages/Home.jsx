@@ -11,6 +11,7 @@ import {
 import { FaInstagram } from 'react-icons/fa'
 import ProductCard from '../Components/Product/ProductCard';
 import HomeSkeleton from '../Components/Common/HomeSkeleton';
+import SEO from '../Components/Common/SEO';
 
 // Swiper Styles
 import 'swiper/css';
@@ -67,6 +68,12 @@ export default function Home() {
 
     return (
         <main className="bg-white pb-16 overflow-x-hidden font-outfit">
+            <SEO 
+                title="Cartivo - Modern Ecommerce Store"
+                description="Shop fashion, electronics, groceries, mobiles and more at Cartivo with secure checkout and fast delivery."
+                keywords="cartivo, ecommerce, online shopping, fashion, electronics, mobiles"
+                image="/logo.png"
+            />
             <div className="mx-auto max-w-[90rem] px-4 lg:px-12 py-12">
                 <div className="grid grid-cols-1 gap-3 sm:gap-6">
                     <div className={`${homeData.heroBanners.length > 0 ? 'lg:col-span-8' : 'lg:col-span-12'} overflow-hidden relative group`}>
