@@ -549,7 +549,7 @@ export default function Header() {
                                                                 exit={{ height: 0, opacity: 0 }}
                                                                 className="overflow-hidden bg-white/50 rounded-2xl mt-1 mx-2"
                                                             >
-                                                                <div className="p-4 grid grid-cols-3 gap-2">
+                                                                <div className="p-2 grid grid-cols-3 gap-2">
                                                                     {cat.children?.map((sub) => (
                                                                         <div key={sub.id} className="space-y-2">
                                                                             <div className="flex flex-wrap gap-2">

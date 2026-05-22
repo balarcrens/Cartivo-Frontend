@@ -68,7 +68,7 @@ export default function Home() {
 
     return (
         <main className="bg-white pb-16 overflow-x-hidden font-outfit">
-            <SEO 
+            <SEO
                 title="Cartivo - Modern Ecommerce Store"
                 description="Shop fashion, electronics, groceries, mobiles and more at Cartivo with secure checkout and fast delivery."
                 keywords="cartivo, ecommerce, online shopping, fashion, electronics, mobiles"
@@ -140,7 +140,7 @@ export default function Home() {
 
             <section className="py-12 max-w-7xl mx-auto border-y border-gray-50 bg-[#fafafa]">
                 <div className="px-4 lg:px-12">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
                         <div className="flex flex-col items-center text-center space-y-2">
                             <Truck className="w-6 h-6 text-gray-900 stroke-1" />
                             <h4 className="text-[12px] font-bold uppercase tracking-widest">Global Shipping</h4>
@@ -176,7 +176,7 @@ export default function Home() {
                         </div>
 
                         <Swiper
-                            modules={[Navigation]}  
+                            modules={[Navigation]}
                             spaceBetween={24}
                             slidesPerView={2}
                             navigation={{ nextEl: '.cat-next', prevEl: '.cat-prev' }}
@@ -190,7 +190,7 @@ export default function Home() {
                             {homeData.categories.map((cat, idx) => (
                                 <SwiperSlide key={idx}>
                                     <div className="group cursor-pointer text-center" onClick={() => navigate(`/category/${cat.slug}`)}>
-                                        <div className="w-40 h-40 overflow-hidden rounded-full bg-[#f8f8f8] mx-auto mb-4 border border-transparent group-hover:border-gray-200 transition-all duration-500">
+                                        <div className="w-35 sm:w-40 h-35 sm:h-40 overflow-hidden rounded-full bg-[#f8f8f8] mx-auto mb-4 border border-transparent group-hover:border-gray-200 transition-all duration-500">
                                             <img src={cat.image || 'https://placehold.co/400x400?text=' + cat.name} alt={cat.name} className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-105" loading='lazy' />
                                         </div>
                                         <span className="text-[12px] text-center font-semibold text-gray-400 group-hover:text-gray-900 transition-colors uppercase tracking-[0.2em]">{cat.name}</span>
@@ -252,7 +252,7 @@ export default function Home() {
             <section className="py-10 sm:py-20 border-y border-gray-50">
                 <div className="mx-auto px-4 lg:px-12">
                     <div className="grid grid-cols-1 lg:grid-cols-2 sm:gap-12">
-                        <div className="relative group overflow-hidden h-[350px] sm:h-[450px] bg-[#f9f9f9] p-3 sm:p-16 flex flex-col sm:flex-row items-center justify-between">
+                        <div className="relative group overflow-hidden h-[350px] sm:h-[450px] sm:bg-[#f9f9f9] p-3 sm:p-16 flex flex-col sm:flex-row items-center justify-between">
                             <img src="/veg-bg.png" alt="" className="absolute sm:right-2.5 right-5 bottom-2.5 h-fit w-1/2 rounded-tl-4xl rounded-br-4xl object-contain mix-blend-multiply opacity-90 transition-transform duration-[2000ms] group-hover:scale-105" loading='lazy' />
                             <div className="relative z-10 max-w-sm sm:max-w-xs">
                                 <span className="text-gray-400 font-semibold uppercase tracking-[0.3em] text-[12px] mb-4 block">Organic Harvest</span>

@@ -173,7 +173,7 @@ const CategoryPage = () => {
                                 {index === categoryPath.length - 1 && !brand ? (
                                     <span className="text-gray-900">{item.name}</span>
                                 ) : (
-                                    <Link to={`/category/${item.slug}`} className="hover:text-gray-900 transition-colors">
+                                    <Link to={`/category/${item.slug}`} className="hover:text-gray-900 line-clamp-1 transition-colors">
                                         {item.name}
                                     </Link>
                                 )}

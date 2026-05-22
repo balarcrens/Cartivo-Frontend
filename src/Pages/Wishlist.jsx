@@ -23,7 +23,7 @@ const Wishlist = () => {
 
     return (
         <div className="min-h-screen bg-white pb-20">
-            <SEO 
+            <SEO
                 title="My Wishlist | Cartivo"
                 description="View and manage your curated wishlist of favorite items on Cartivo. Save now, buy later."
                 keywords="wishlist, saved products, favorites, premium boutique, cartivo"
@@ -69,12 +69,12 @@ const Wishlist = () => {
                                         ratings: item.ratings
                                     }}
                                 />
-                                <div className="flex gap-2">
+                                <div className="flex sm:gap-2">
                                     <button
                                         onClick={() => addToCart(item.product_id, null, 1)}
-                                        className="flex-grow cursor-pointer bg-white border border-gray-900 text-gray-900 py-3 text-[11px] font-bold uppercase tracking-widest hover:bg-gray-900 hover:text-white transition-all flex items-center justify-center gap-2 active:scale-95"
+                                        className="flex-grow cursor-pointer bg-white border border-gray-200 sm:border-gray-900 text-gray-900 py-3 px-1.5 text-[11px] font-bold uppercase tracking-widest hover:bg-gray-900 hover:text-white transition-all flex items-center justify-center gap-1 sm:gap-2 active:scale-95"
                                     >
-                                        <ShoppingBag className="w-3 h-3" /> Move to Bag
+                                        <ShoppingBag className="w-3 h-3" /> Add to cart
                                     </button>
                                     <button
                                         onClick={() => removeFromWishlist(item.product_id)}

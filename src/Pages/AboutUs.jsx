@@ -4,6 +4,7 @@ import SEO from '../Components/Common/SEO';
 
 export default function AboutUs() {
     const [loaded, setLoaded] = useState(false);
+
     return (
         <div className="min-h-screen bg-white">
             <SEO
@@ -22,7 +23,7 @@ export default function AboutUs() {
                     className={`absolute inset-0 w-full h-full object-cover brightness-50 transition-[filter] duration-700 ${loaded ? 'blur-0' : 'blur-md'}`}
                 />
                 <div className="relative z-10 text-center px-4">
-                    <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 font-outfit tracking-tight animate-in">
+                    <h1 className={`text-5xl md:text-7xl font-bold ${loaded ? 'text-white' : 'text-black'} mb-6 font-outfit tracking-tight animate-in`}>
                         We Are <span className="text-indigo-400">Cartivo</span>
                     </h1>
                     <p className="text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto font-inter leading-relaxed animate-in animation-delay-300">
